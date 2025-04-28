@@ -102,3 +102,13 @@
   margin: auto;
 
 }
+
+.action-bar__button:hover {
+  cursor: pointer;
+  opacity: .5;
+}
+
+.gallery__like-button:hover {
+  cursor: pointer;
+  opacity: .5;
+}
