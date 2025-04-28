@@ -1,0 +1,11 @@
+.header {
+    padding-bottom: 30px;
+    display: flex;
+    border-bottom: 1px solid #545454;
+    width: 880px;
+    height: 75px;
+    margin: 45px 200px 0;
+}
+
+
+
