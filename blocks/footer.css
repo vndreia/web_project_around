@@ -4,6 +4,9 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 100%;
+  max-width: 880px;
+  padding-right: 
+  680px;
 }
 
 .footer__paragraph {
@@ -11,3 +14,28 @@
     margin-bottom: 60px;
 }
 
+@media screen and (max-width: 700px) {
+  .footer {
+    padding: unset;
+    width: 100%;
+    max-width: 282px;
+  }
+
+  .footer__paragraph {
+    text-align: left;
+  }
+}
+
+@media screen and (min-width: 701px) and (max-width:899px) {
+.footer {
+  width: 100%;
+  max-width: 660px;
+  margin: auto;
+  padding: unset;
+
+}
+
+.footer__paragraph {
+ text-align: start;
+}
+}
