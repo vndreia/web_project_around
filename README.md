@@ -12,4 +12,5 @@
 - **Javascript**  
 
 # Github pages link: 
+https://vndreia.github.io/web_project_around/
 
