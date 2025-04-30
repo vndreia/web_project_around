@@ -2,7 +2,7 @@
   max-width: 880px;
 }
 
-.action-bar {
+.main-bar {
   display: flex;
   flex-direction: row;
   color: #ffffff;
@@ -12,13 +12,13 @@
   align-items: center;
 }
 
-.action-bar__image {
+.main-bar__image {
   width: 120px;
   height: auto;
   border-radius: 50%;
 }
 
-.action-bar__container {
+.main-bar__container {
   width: 415px;
   height: 77px;
   display: flex;
@@ -27,7 +27,7 @@
   justify-content: space-between; /* Espacia los bloques */
 }
 
-.action-bar__text {
+.main-bar__text {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -35,45 +35,44 @@
   gap: 15px;
 }
 
-.action-bar__title, .action-bar__paragraph {
+.main-bar__title,
+.main-bar__paragraph {
   margin: 0;
 }
 
-.action-bar__title {
-  font-family: 'Inter', sans-serif;
-font-weight: 500;
-font-size: 42px;
-line-height: 48px;
-
+.main-bar__title {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
 }
 
-.action-bar__paragraph {
-  font-family: 'Inter', sans-serif;
+.main-bar__paragraph {
+  font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 100%;
-  
 }
 
-.action-bar__button {
+.main-bar__button {
   background-color: #000;
   border: 1px solid white;
 }
 
-.action-bar__button-type-form {
+.main-bar__button-type-form {
   width: 24px;
   height: 24px;
   margin: 0 90px 25px 0;
 }
 
-.action-bar__button-type-add {
+.main-bar__button-type-add {
   width: 150px;
   height: 50px;
   border-radius: 2px;
-  margin: auto 0 auto 200px
+  margin: auto 0 auto 200px;
 }
 
-.gallery {
+.main-gallery {
   width: 880px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -81,7 +80,7 @@ line-height: 48px;
   gap: 20px;
 }
 
-.gallery__container-item {
+.main-gallery__container-item {
   width: 282px;
   height: 361px;
   border-radius: 10px;
@@ -89,7 +88,7 @@ line-height: 48px;
   gap: 20px;
 }
 
-.gallery__image {
+.main-gallery__image {
   width: 100%;
   height: 282px;
   object-fit: cover;
@@ -97,22 +96,19 @@ line-height: 48px;
   border-radius: 10px 10px 0 0;
 }
 
-.gallery__text {
+.main-gallery__text {
   font-family: "Inter", sans-serif;
   font-weight: 900;
   font-size: 24px;
   line-height: 100%;
-
-
 }
 
-.gallery__like-button {
+.main-gallery__like-button {
   background: transparent;
   border: none;
-
 }
 
-.gallery__container-text {
+.main-gallery__container-text {
   display: flex;
   justify-content: space-between;
   max-width: 246px;
@@ -120,74 +116,68 @@ line-height: 48px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-
 }
 
-.action-bar__button:hover {
+.main-bar__button:hover {
   cursor: pointer;
-  opacity: .5;
+  opacity: 0.5;
 }
 
-.gallery__like-button:hover {
+.main-gallery__like-button:hover {
   cursor: pointer;
-  opacity: .5;
+  opacity: 0.5;
 }
-
 
 @media screen and (max-width: 700px) {
-  .action-bar {
+  .main-bar {
     width: 282px;
     width: 100%;
     flex-direction: column;
     margin-bottom: 40px;
     height: auto;
     gap: 30px;
-
   }
 
-  .action-bar__container {
-margin-left: 50px;
+  .main-bar__container {
+    margin-left: 50px;
   }
 
-  .action-bar__button-type-add {
+  .main-bar__button-type-add {
     width: 282px;
     margin-right: 190px;
   }
 
-  .action-bar__paragraph {
+  .main-bar__paragraph {
     text-align: center;
     margin-left: 60px;
   }
 
-  .gallery {
+  .main-gallery {
     max-width: 282px;
     grid-template-columns: 282px;
     margin: 0 auto;
-
   }
 }
 
 @media screen and (min-width: 701px) and (max-width: 899px) {
-  .action-bar {
+  .main-bar {
     width: 660px;
     box-sizing: border-box;
   }
 
-  .action-bar__container {
+  .main-bar__container {
     gap: 80px;
     width: auto;
     height: 100%;
   }
 
-  .action-bar__button-type-add {
+  .main-bar__button-type-add {
     margin: 0;
   }
 
-  .gallery {
+  .main-gallery {
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
-
   }
-
 }
