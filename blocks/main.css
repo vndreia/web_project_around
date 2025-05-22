@@ -105,16 +105,18 @@
   font-weight: 900;
   font-size: 24px;
   line-height: 100%;
+  margin: 0;
 }
 
 .main-gallery__like-button,
-.card__heart-button {
-  background: transparent;
+.card__like-button {
+  background: none;
   border: none;
+  padding: 0;
 }
 
 .main-gallery__container-text,
-.card__containter-text {
+.card__container-text {
   display: flex;
   justify-content: space-between;
   max-width: 246px;
@@ -129,12 +131,37 @@
   opacity: 0.5;
 }
 
-.card__heart-button:hover {
+.card__like-button:hover {
   cursor: pointer;
   opacity: 0.5;
 }
 
-@media screen and (max-width: 700px) {
+.card__like-button.active {
+  color: #000;
+}
+.card__like-button.active .heart-icon path {
+  fill: currentColor; /* rellena el corazón con el color definido en .active */
+  stroke: currentColor; /* para que el borde también cambie a ese color */
+}
+
+.card__trash-button {
+  background: transparent;
+  border: none;
+  position: relative;
+  bottom: 75%;
+  left: 84%;
+}
+
+.card__trash-button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.heart-icon {
+  background: none;
+}
+
+.like @media screen and (max-width: 700px) {
   .main-bar {
     width: 282px;
     width: 100%;
@@ -158,7 +185,8 @@
     margin-left: 60px;
   }
 
-  .main-gallery {
+  .main-gallery,
+  .cards {
     max-width: 282px;
     grid-template-columns: 282px;
     margin: 0 auto;
@@ -181,7 +209,8 @@
     margin: 0;
   }
 
-  .main-gallery {
+  .main-gallery,
+  .cards {
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
