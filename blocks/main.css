@@ -121,11 +121,14 @@
   justify-content: space-between;
   max-width: 246px;
   margin: auto;
+}
+
+.card__image-text {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 200px;
 }
-
 .main-bar__button:hover {
   cursor: pointer;
   opacity: 0.5;
@@ -161,7 +164,7 @@
   background: none;
 }
 
-.like @media screen and (max-width: 700px) {
+@media screen and (max-width: 700px) {
   .main-bar {
     width: 282px;
     width: 100%;
