@@ -72,7 +72,8 @@
   margin: auto 0 auto 200px;
 }
 
-.main-gallery {
+.main-gallery,
+.cards {
   width: 880px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -80,7 +81,8 @@
   gap: 20px;
 }
 
-.main-gallery__container-item {
+.main-gallery__container-item,
+.card__item {
   width: 282px;
   height: 361px;
   border-radius: 10px;
@@ -88,7 +90,8 @@
   gap: 20px;
 }
 
-.main-gallery__image {
+.main-gallery__image,
+.card__image {
   width: 100%;
   height: 282px;
   object-fit: cover;
@@ -96,19 +99,22 @@
   border-radius: 10px 10px 0 0;
 }
 
-.main-gallery__text {
+.main-gallery__text,
+.card__image-text {
   font-family: "Inter", sans-serif;
   font-weight: 900;
   font-size: 24px;
   line-height: 100%;
 }
 
-.main-gallery__like-button {
+.main-gallery__like-button,
+.card__heart-button {
   background: transparent;
   border: none;
 }
 
-.main-gallery__container-text {
+.main-gallery__container-text,
+.card__containter-text {
   display: flex;
   justify-content: space-between;
   max-width: 246px;
@@ -123,7 +129,7 @@
   opacity: 0.5;
 }
 
-.main-gallery__like-button:hover {
+.card__heart-button:hover {
   cursor: pointer;
   opacity: 0.5;
 }

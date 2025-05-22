@@ -14,6 +14,7 @@
   </head>
   <body class="page">
     <div class="popup">
+      <!-- Popup para añadir una nueva card -->
       <div class="popup-container">
         <button class="popup__button-close"></button>
         <form class="form">
@@ -36,6 +37,7 @@
         </form>
       </div>
     </div>
+    <!-- Fin del popup para añadir una nueva card -->
     <header class="header">
       <img
         src="images/logo.svg.svg"
@@ -63,100 +65,31 @@
           <img src="images/add-button (1).svg" alt="add-button" />
         </button>
       </section>
-      <section class="main-gallery">
-        <div class="main-gallery__container-item">
-          <img
-            src="images/item1.jpeg"
-            class="main-gallery__image"
-            alt="Morocco desert and walking camels"
-          />
-          <div class="main-gallery__container-text">
-            <p class="main-gallery__text">Morocco</p>
-            <button class="main-gallery__like-button">
-              <img src="images/like-button.svg" alt="like button icon" />
-            </button>
-          </div>
-        </div>
-        <div class="main-gallery__container-item">
-          <img
-            src="images/item2.jpg"
-            class="main-gallery__image"
-            alt="Spain city"
-          />
-          <div class="main-gallery__container-text">
-            <p class="main-gallery__text">Spain</p>
-            <button class="main-gallery__like-button">
-              <img src="images/like-button.svg" alt="like button icon" />
-            </button>
-          </div>
-        </div>
-        <div class="main-gallery__container-item">
-          <img
-            src="images/item3.jpg"
-            class="main-gallery__image"
-            alt="France city"
-          />
-          <div class="main-gallery__container-text">
-            <p class="main-gallery__text">France</p>
-            <button class="main-gallery__like-button">
-              <img src="images/like-button.svg" alt="like button icon" />
-            </button>
-          </div>
-        </div>
-        <div class="main-gallery__container-item">
-          <img
-            src="images/item4.jpg"
-            class="main-gallery__image"
-            alt="Blue city"
-          />
-          <div class="main-gallery__container-text">
-            <p class="main-gallery__text">Chefchaouen</p>
-            <button class="main-gallery__like-button">
-              <img src="images/like-button.svg" alt="like button icon" />
-            </button>
-          </div>
-        </div>
-        <div class="main-gallery__container-item">
-          <img
-            src="images/item5.jpg"
-            class="main-gallery__image"
-            alt="London city"
-          />
-          <div class="main-gallery__container-text">
-            <p class="main-gallery__text">London</p>
-            <button class="main-gallery__like-button">
-              <img src="images/like-button.svg" alt="like button icon" />
-            </button>
-          </div>
-        </div>
-        <div class="main-gallery__container-item">
-          <img
-            src="images/item6.jpg"
-            class="main-gallery__image"
-            alt="French port"
-          />
-          <div class="main-gallery__container-text">
-            <p class="main-gallery__text">La Rochelle</p>
-            <button class="main-gallery__like-button">
-              <img src="images/like-button.svg" alt="like button icon" />
-            </button>
-          </div>
-        </div>
-      </section>
     </main>
     <template id="card__template">
       <div class="card__item">
-<img class="card__image" src="" alt="">
-<p class="card__image-text"></p>
-<button class="card__heart-button"><img src="./images/like-button.svg" alt="card__icon-like"></button>
-<button class="card__trash-button"><img src="./images/Trash.svg" alt="card__icon-trash"></button>
+        <img class="card__image" src="" alt="" />
+        <p class="card__image-text"></p>
+        <button class="card__heart-button">
+          <img src="./images/like-button.svg" alt="card__icon-like" />
+        </button>
+        <button class="card__trash-button">
+          <img src="./images/Trash.svg" alt="card__icon-trash" />
+        </button>
+        <div class="card__container-text">
+          <p class="card__text">Morocco</p>
+          <button class="card__like-button">
+            <img src="images/like-button.svg" alt="like button icon" />
+          </button>
+        </div>
       </div>
     </template>
-        <section class="cards"></section> <!--Aquí es donde se muestran las nuevas cards con la función de renderCards-->
+    <section class="cards"></section>
+    <!--Aquí es donde se muestran las nuevas cards con la función de renderCards-->
     <footer class="footer">
       <p class="footer__paragraph">&copy; 2025 Around the World</p>
     </footer>
     <script src="./scripts/index.js" defer></script>
-    <script src="./scripts/cards.js"defer></script>
+    <script src="./scripts/cards.js" defer></script>
   </body>
 </html>
