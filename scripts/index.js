@@ -2,8 +2,11 @@
 const popupButton = document.querySelector(".main-bar__button-type-form");
 const popup = document.querySelector(".popup");
 const popupClose = document.querySelector(".popup__button-close");
+const addButton = document.querySelector(".main-bar__button-type-add");
+const addPopup = document.querySelector(".form__add");
 
 // ---> 2. Manipulate elements
+//Edit info popup
 function openPopUp() {
   popup.classList.add("popup_opened"); //Adds the class to popup, not the button
 }
@@ -13,6 +16,8 @@ popupButton.addEventListener("click", openPopUp); //Adds the event to the button
 function closePopUp() {
   popup.classList.remove("popup_opened");
 }
+
+//Add new card popup
 
 // ---> 3. Create events
 popupClose.addEventListener("click", closePopUp);

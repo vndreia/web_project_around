@@ -24,14 +24,12 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
   },
 ];
+
 //1 selección de elementos
 const cardsZone = document.querySelector(".cards");
 const cardTemplate = document.querySelector("#card__template").content; //se accede al contenido del template seleccionado
 const cardContainer = document.querySelector(".card__item");
 //2 Manipulación
-function deleteCard(card) {
-  card.remove();
-}
 
 function createCard(cardData) {
   const newNode = cardTemplate.cloneNode(true); //Deep clone
@@ -47,8 +45,8 @@ function createCard(cardData) {
   image.alt = cardData.name;
   //Añadir ahora sí el nuev o nodo al DOM
   //3 Añadir Evento
-  deleteButton.addEventListener("click", () => {
-    newNode.remove();
+  deleteButton.addEventListener("click", (event) => {
+    event.target.closest(".card__item").remove();
   });
 
   likeButton.addEventListener("click", () => {
