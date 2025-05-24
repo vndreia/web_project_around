@@ -1,28 +1,23 @@
 //Popup ---> 1. Select DOM elements
 const popupButton = document.querySelector(".main-bar__button-type-form");
-const popup = document.querySelector(".popup");
+const popup = document.querySelector(".popup-edit-profile");
 const popupClose = document.querySelector(".popup__button-close");
-const addButton = document.querySelector(".main-bar__button-type-add");
-const addPopup = document.querySelector(".form__add");
 
 // ---> 2. Manipulate elements
 //Edit info popup
 function openPopUp() {
   popup.classList.add("popup_opened"); //Adds the class to popup, not the button
 }
-
 popupButton.addEventListener("click", openPopUp); //Adds the event to the button, not the class
 
 function closePopUp() {
   popup.classList.remove("popup_opened");
 }
 
-//Add new card popup
-
 // ---> 3. Create events
 popupClose.addEventListener("click", closePopUp);
 
-//Form
+//Form de edit
 const formElement = document.querySelector(".form");
 console.log(formElement);
 const inputName = document.querySelector(".form__input-type-name");
@@ -43,6 +38,11 @@ function handleSubmit(evt) {
   editName.textContent = name; // Actualizar el nombre en la parte visible
   editJob.textContent = job; // Actualizar el 'about' en la parte visible
   popup.classList.remove("popup_opened"); // Cerrar el popup después de enviar el formulario
+
+  if (!name || !job) {
+    alert("Por favor, completa los campos");
+    return; //Sólo corta la función si no hay valores
+  }
 }
 
 //Eventos

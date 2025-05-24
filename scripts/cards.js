@@ -29,7 +29,16 @@ const initialCards = [
 const cardsZone = document.querySelector(".cards");
 const cardTemplate = document.querySelector("#card__template").content; //se accede al contenido del template seleccionado
 const cardContainer = document.querySelector(".card__item");
+
 //2 Manipulación
+
+function openPopup() {
+  const popup = document.querySelector(".popup-add-place");
+  popup.classList.add("popup_opened");
+}
+// Selección del botón que abre el popup
+const addButtonMain = document.querySelector(".main-bar__button-type-add");
+addButtonMain.addEventListener("click", openPopup);
 
 function createCard(cardData) {
   const newNode = cardTemplate.cloneNode(true); //Deep clone
@@ -65,5 +74,35 @@ function renderCards() {
     cardsZone.appendChild(card);
   });
 }
-
 renderCards();
+
+//Segundo popup
+//----> 1. Select DOM elements
+const addButton = document.querySelector(".main-bar__button-type-add");
+const formAdd = document.querySelector(".form__add");
+const addPlaceInput = document.querySelector(".form__input-place");
+const addLinkInput = document.querySelector(".form__input-link");
+
+//----> 2. Manipulate elements
+function handleForm(evt) {
+  //Prevent default form behavior
+  evt.preventDefault();
+  const name = addPlaceInput.value; // Obtener el valor del campo lugar
+  const link = addLinkInput.value; // Obtener el valor del campo URL
+
+  if (!name || !link) {
+    alert("Por favor, completa los campos");
+    return; //Sólo corta la función si no hay valores
+  }
+  const cardData = {
+    name,
+    link,
+  };
+
+  const card = createCard(cardData); //Llamar a la función createCard con los valores de cardData
+  cardsZone.appendChild(card); //Añadir la card al DOM
+}
+
+formAdd.addEventListener("submit", handleForm); // Aquí estamos escuchando el evento submit del formulario
+
+//Function to add new card
