@@ -10,12 +10,13 @@ function openPopUp() {
 }
 popupButton.addEventListener("click", openPopUp); //Adds the event to the button, not the class
 
+//Close popup
 function closePopUp() {
   popup.classList.remove("popup_opened");
 }
+popupClose.addEventListener("click", closePopUp);
 
 // ---> 3. Create events
-popupClose.addEventListener("click", closePopUp);
 
 //Form de edit
 const formElement = document.querySelector(".form");

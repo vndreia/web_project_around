@@ -29,6 +29,7 @@ const initialCards = [
 const cardsZone = document.querySelector(".cards");
 const cardTemplate = document.querySelector("#card__template").content; //se accede al contenido del template seleccionado
 const cardContainer = document.querySelector(".card__item");
+const buttonClose = document.querySelector(".popup__button-close-place");
 
 //2 Manipulación
 
@@ -39,6 +40,13 @@ function openPopup() {
 // Selección del botón que abre el popup
 const addButtonMain = document.querySelector(".main-bar__button-type-add");
 addButtonMain.addEventListener("click", openPopup);
+
+function closePopup() {
+  const popup = document.querySelector(".popup-add-place");
+  popup.classList.remove("popup_opened");
+}
+
+buttonClose.addEventListener("click", closePopup);
 
 function createCard(cardData) {
   const newNode = cardTemplate.cloneNode(true); //Deep clone
