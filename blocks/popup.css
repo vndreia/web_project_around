@@ -158,8 +158,16 @@
     max-width: 238px;
     margin: 40px auto;
   }
+}
+
+@media screen and (min-width: 1053px) {
+  .popup-container {
+    position: relative;
+    width: 500px;
+    margin: 0 auto;
+  }
 
   .popup__button-close-place {
-    left: 210px;
+    position: fixed;
   }
 }
