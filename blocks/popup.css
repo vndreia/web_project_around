@@ -13,10 +13,32 @@
   display: none;
 }
 
+.popup__image-content {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.popup-image__img {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+.popup-image__caption {
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  position: relative;
+  right: 32%;
+}
+
 .popup_opened {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .popup-container {
@@ -42,6 +64,15 @@
   border: none;
   position: relative;
   left: 400px;
+}
+
+.popup__button-close-image {
+  background: url(../images/close-icon.svg) center no-repeat;
+  width: 50px;
+  height: 50px;
+  border: none;
+  position: relative;
+  right: 10%;
 }
 
 .form,

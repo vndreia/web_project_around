@@ -69,6 +69,10 @@ function createCard(cardData) {
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("active");
   });
+
+  image.addEventListener("click", () => {
+    openImagePopup(cardData.link, cardData.name, cardData.name);
+  });
   return newNode;
 }
 
@@ -113,4 +117,27 @@ function handleForm(evt) {
 
 formAdd.addEventListener("submit", handleForm); // Aquí estamos escuchando el evento submit del formulario
 
-//Function to add new card
+//Open the image popup section
+function openImagePopup(src, altText, captionText) {
+  const imageContainer = document.querySelector(".popup-image");
+  const image = document.querySelector(".popup-image__img");
+  const imageCaption = document.querySelector(".popup-image__caption");
+  const imageCloseButton = document.querySelector(".popup__button-close-image");
+
+  // Actualiza la imagen y el texto
+  image.src = src;
+  image.alt = altText;
+  imageCaption.textContent = captionText;
+
+  // Abre el popup
+  imageContainer.classList.add("popup_opened");
+
+  // Función para cerrar el popup
+  function closePopup() {
+    imageContainer.classList.remove("popup_opened");
+    imageCloseButton.removeEventListener("click", closePopup);
+  }
+
+  // Añade el listener para cerrar al botón
+  imageCloseButton.addEventListener("click", closePopup);
+}
