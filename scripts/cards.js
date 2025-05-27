@@ -97,24 +97,21 @@ const addLinkInput = document.querySelector(".form__input-link");
 
 //----> 2. Manipulate elements
 function handleForm(evt) {
-  //Prevent default form behavior
   evt.preventDefault();
-  const name = addPlaceInput.value; // Obtener el valor del campo lugar
-  const link = addLinkInput.value; // Obtener el valor del campo URL
+  const name = addPlaceInput.value;
+  const link = addLinkInput.value;
 
   if (!name || !link) {
     alert("Por favor, completa los campos");
-    return; //Sólo corta la función si no hay valores
+    return;
   }
-  const cardData = {
-    name,
-    link,
-  };
+  const cardData = { name, link };
+  const card = createCard(cardData);
+  cardsZone.appendChild(card);
 
-  const card = createCard(cardData); //Llamar a la función createCard con los valores de cardData
-  cardsZone.appendChild(card); //Añadir la card al DOM
+  formAdd.reset(); // Limpia inputs
+  closePopup(); // Cierra el popup
 }
-
 formAdd.addEventListener("submit", handleForm); // Aquí estamos escuchando el evento submit del formulario
 
 //Open the image popup section
