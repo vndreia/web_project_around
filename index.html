@@ -48,15 +48,23 @@
             class="form__input form__input-place"
             id="place"
             placeholder="Título"
+            minlength="2"
+            maxlength="40"
+            required
           />
+          <span id="place-error" class="popup-error"></span>
           <label for="link"></label>
           <input
-            type="text"
+            type="url"
             class="form__input form__input-link"
             id="link"
             placeholder="Enlace a la imagen"
+            minlength="2"
+            maxlength="200"
+            required
           />
-          <button type="submit" class="form__button-save">Crear</button>
+          <span id="link-error" class="popup__error"></span>
+          <button type="submit" class="form__button-save" disabled>Crear</button>
         </form>
       </div>
     </div>
@@ -116,8 +124,7 @@
         </div>
       </div>
     </template>
-    <section class="cards"></section>
-    <!--Aquí es donde se muestran las nuevas cards con la función de renderCards-->
+    <section class="cards"></section> <!--Aquí es donde se muestran las nuevas cards con la función de renderCards-->
     <footer class="footer">
       <p class="footer__paragraph">&copy; 2025 Around the World</p>
     </footer>
@@ -131,5 +138,6 @@
     </div>
     <script src="./scripts/index.js" defer></script>
     <script src="./scripts/cards.js" defer></script>
+    <script src="./scripts/validate.js" defer></script>
   </body>
 </html>
