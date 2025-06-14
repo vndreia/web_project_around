@@ -43,7 +43,7 @@
 
 .popup-container {
   display: flex;
-  width: 500px;
+  width: auto;
   height: auto;
   flex-direction: column;
   margin: 0 auto;
@@ -78,7 +78,7 @@
 .form,
 .form__add {
   width: 430px;
-  height: 330px;
+  height: 100%;
   background-color: #fff;
   color: #000;
   display: flex;
@@ -135,12 +135,11 @@
   opacity: 0.5;
 }
 
-.popup__error { /*class to show the error message*/
-display: none;
-}
-
 .popup__error_visible { /* Class to show the error message */
   display: block;
+  color: red;
+  align-items: center;
+
 }
 
 .form__button_disabled  {  /*class applied when inputs in the form are invalid*/
