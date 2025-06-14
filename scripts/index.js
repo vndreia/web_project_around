@@ -14,6 +14,7 @@ popupButton.addEventListener("click", openPopUp); //Adds the event to the button
 function closePopUp() {
   popup.classList.remove("popup_opened");
 }
+//Here goes the esc to close popup
 popupClose.addEventListener("click", closePopUp);
 
 // ---> 3. Create events
@@ -49,3 +50,5 @@ function handleSubmit(evt) {
 //Eventos
 formElement.addEventListener("submit", handleSubmit); // Aquí estamos escuchando el evento submit del formulario
 console.log(editName, editJob);
+
+

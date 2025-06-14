@@ -15,14 +15,19 @@ const hideError = (input, config) => {
 
 //Function that verifies inputs validity
 const checkInputValidity = (input, config) => {
+    console.log(`Verificando: ${input.id}, válido: ${input.validity.valid}`);
   if (input.validity.valid) {
-    hideError(input, config)
+    hideError(input, config);
+    input.classList.remove(config.inputErrorClass); //Cleans up error class
   } else {
     showError(input, config);
+    input.classList.add(config.inputErrorClass); //Highlights the wrong input
   }
 };
 
-const toggleButtonState = (form, button, config) => {};
+/*const toggleButtonState = (form, button, config) => {
+  const inputs = 
+};*/
 
 const setEventListeners = (formElement, config) => {
   const inputs = formElement.querySelectorAll(config.inputSelector); //When I select that, a NodeList is created
@@ -40,6 +45,7 @@ const enableValidation = (config) => {
   });
 };
 
+//This notation is a pain in the *** but it makes the code reusable:
 enableValidation({
   formSelector: ".form__add",
   inputSelector: ".form__input",
