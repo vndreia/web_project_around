@@ -10,12 +10,12 @@ const showError = (input, config) => {
 const hideError = (input, config) => {
   const errorElement = document.querySelector(`#${input.id}-error`); //Template literal selects a dynamic ID linked to span
   errorElement.textContent = ""; //Empty string to reset the validationMessage set by default
-  errorElement.classList.remove(config.errorClass); 
+  errorElement.classList.remove(config.errorClass);
 };
 
 //Function that verifies inputs validity
 const checkInputValidity = (input, config) => {
-    console.log(`Verificando: ${input.id}, válido: ${input.validity.valid}`);
+  console.log(`Verificando: ${input.id}, válido: ${input.validity.valid}`);
   if (input.validity.valid) {
     hideError(input, config);
     input.classList.remove(config.inputErrorClass); //Cleans up error class
@@ -25,16 +25,32 @@ const checkInputValidity = (input, config) => {
   }
 };
 
-/*const toggleButtonState = (form, button, config) => {
-  const inputs = 
-};*/
+const toggleButtonState = (formElement, button, config) => {
+  const inputs = Array.from(formElement.querySelectorAll(config.inputSelector)); //Array allow us to verify each input
+  const isValid = inputs.every((input) => input.validity.valid); //Checks if all inputs are valid
+
+  if (isValid) {
+    button.disabled = false; //Enables the button
+    button.classList.remove(config.inactiveButtonClass); //Removes the class that disables the button
+  } else {
+    button.disabled = true; //Disables the button
+    button.classList.add(config.inactiveButtonClass); //Adds the class that disables the button
+  }
+};
 
 const setEventListeners = (formElement, config) => {
   const inputs = formElement.querySelectorAll(config.inputSelector); //When I select that, a NodeList is created
+  const button = formElement.querySelector(config.submitButtonSelector);
+  toggleButtonState(formElement, button, config);
+
   inputs.forEach((input) => {
     input.addEventListener("input", () => {
       checkInputValidity(input, config);
+      toggleButtonState(formElement, button, config);
     });
+  });
+  formElement.addEventListener("submit", (evt) => {
+    evt.preventDefault();
   });
 };
 
@@ -54,4 +70,3 @@ enableValidation({
   inputErrorClass: "form__input-error",
   errorClass: "popup__error_visible",
 });
-
