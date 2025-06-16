@@ -47,6 +47,11 @@ function closePopup() {
 }
 
 buttonClose.addEventListener("click", closePopup);
+popup.addEventListener("click", (evt) => {
+  if (evt.target === popup) {
+    closePopup();
+  }
+});
 
 function createCard(cardData) {
   const newNode = cardTemplate.cloneNode(true); //Deep clone
