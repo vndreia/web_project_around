@@ -29,26 +29,26 @@ const initialCards = [
 const cardsZone = document.querySelector(".cards");
 const cardTemplate = document.querySelector("#card__template").content; //se accede al contenido del template seleccionado
 const cardContainer = document.querySelector(".card__item");
-const buttonClose = document.querySelector(".popup__button-close-place");
-
-//2 Manipulación
+const buttonClose = document.querySelector(".popup__button-close-place"); //Close button
+const buttonOpen = document.querySelector(".main-bar__button-type-add"); //Button to open the popup for adding a place
+const popupAddPlace = document.querySelector(".popup-add-place"); //Popup for adding a place
 
 function openPopup() {
-  const popup = document.querySelector(".popup-add-place");
-  popup.classList.add("popup_opened");
+  popupAddPlace.classList.add("popup_opened");
 }
-// Selección del botón que abre el popup
-const addButtonMain = document.querySelector(".main-bar__button-type-add");
-addButtonMain.addEventListener("click", openPopup);
+buttonOpen.addEventListener("click", openPopup);
 
 function closePopup() {
-  const popup = document.querySelector(".popup-add-place");
-  popup.classList.remove("popup_opened");
+  popupAddPlace.classList.remove("popup_opened");
 }
-
 buttonClose.addEventListener("click", closePopup);
-popup.addEventListener("click", (evt) => {
-  if (evt.target === popup) {
+popupAddPlace.addEventListener("click", (evt) => {
+  if (evt.target === popupAddPlace) {
+    closePopup();
+  }
+});
+document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
     closePopup();
   }
 });
