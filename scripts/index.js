@@ -16,7 +16,15 @@ function closePopUp() {
 }
 //Here goes the esc to close popup
 popupClose.addEventListener("click", closePopUp);
-
+document.addEventListener("keydown", (evt) => {
+  //Remember evt.keys work only in the whole document, not in a specific element
+  if (evt.key === "Escape") {
+    closePopUp();
+  }
+});
+popup.addEventListener("click", (evt) => {
+  closePopUp();
+});
 // ---> 3. Create events
 
 //Form de edit
@@ -40,15 +48,19 @@ function handleSubmit(evt) {
   editName.textContent = name; // Actualizar el nombre en la parte visible
   editJob.textContent = job; // Actualizar el 'about' en la parte visible
   popup.classList.remove("popup_opened"); // Cerrar el popup después de enviar el formulario
-
-  if (!name || !job) {
-    alert("Por favor, completa los campos");
-    return; //Sólo corta la función si no hay valores
-  }
 }
 
 //Eventos
 formElement.addEventListener("submit", handleSubmit); // Aquí estamos escuchando el evento submit del formulario
 console.log(editName, editJob);
 
-
+import { enableValidation } from "./validate.js"; //Importing the validation function
+//This notation is a pain in the *** but it makes the code reusable:
+enableValidation({
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__button-save",
+  inactiveButtonClass: "form__button_disabled",
+  inputErrorClass: "form__input-error",
+  errorClass: "popup__error_visible",
+});

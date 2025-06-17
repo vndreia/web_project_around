@@ -14,7 +14,7 @@
   </head>
   <body class="page">
     <div class="popup popup-edit-profile">
-      <!-- Popup para añadir una nueva card -->
+      <!-- Popup para editar perfil -->
       <div class="popup-container">
         <button class="popup__button-close"></button>
         <form class="form">
@@ -25,15 +25,21 @@
             class="form__input form__input-type-name"
             placeholder="Nombre"
             id="name"
+            required
           />
+          <span id="name-error" class="popup__error-visible"></span>
           <label for="about"></label>
           <input
             type="text"
             class="form__input form__input-type-about"
             placeholder="Acerca de mí"
             id="about"
+            required
           />
-          <button type="submit" class="form__button-save">Guardar</button>
+          <span id="about-error" class="popup__error_visible"></span>
+          <button disabled type="submit" class="form__button-save">
+            Guardar
+          </button>
         </form>
       </div>
     </div>
@@ -52,7 +58,7 @@
             maxlength="40"
             required
           />
-          <span id="place-error" class="popup-error-visible"></span>
+          <span id="place-error" class="popup-error_visible"></span>
           <label for="link"></label>
           <input
             type="url"
@@ -139,8 +145,9 @@
       <p class="popup-image__caption"></p>
       <!--Texto dinámico-->
     </div>
+    <script src="./scripts/validate.js" type="module" defer></script>
+    <!-- type = "module" is necessary for export/import -->
     <script src="./scripts/cards.js" defer></script>
-    <script src="./scripts/index.js" defer></script>
-    <script src="./scripts/validate.js" defer></script>
+    <script src="./scripts/index.js" type="module" defer></script>
   </body>
 </html>

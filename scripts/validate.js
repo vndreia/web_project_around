@@ -61,12 +61,5 @@ const enableValidation = (config) => {
   });
 };
 
-//This notation is a pain in the *** but it makes the code reusable:
-enableValidation({
-  formSelector: ".form__add",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__button-save",
-  inactiveButtonClass: "form__button_disabled",
-  inputErrorClass: "form__input-error",
-  errorClass: "popup__error_visible",
-});
+export { enableValidation };
+//This tells the browser it's ok to import this function in other files
