@@ -2,7 +2,6 @@
 const popupButton = document.querySelector(".main-bar__button-type-form");
 const popup = document.querySelector(".popup-edit-profile");
 const popupClose = document.querySelector(".popup__button-close");
-const popupEditProfile = document.querySelector(".popup-edit-profile");
 
 // ---> 2. Manipulate elements
 //Edit info popup
@@ -20,6 +19,11 @@ popupClose.addEventListener("click", closePopUp);
 document.addEventListener("keydown", (evt) => {
   //Remember evt.keys work only in the whole document, not in a specific element
   if (evt.key === "Escape") {
+    closePopUp();
+  }
+});
+popup.addEventListener("click", (evt) => {
+  if (evt.target === popup) {
     closePopUp();
   }
 });

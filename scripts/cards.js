@@ -93,7 +93,7 @@ function renderCards() {
 }
 renderCards();
 
-//Segundo popup
+//Form popup para agregar imagen
 //----> 1. Select DOM elements
 const addButton = document.querySelector(".main-bar__button-type-add");
 const formAdd = document.querySelector(".form__add");
@@ -142,4 +142,9 @@ function openImagePopup(src, altText, captionText) {
 
   // Añade el listener para cerrar al botón
   imageCloseButton.addEventListener("click", closePopup);
+  imageContainer.addEventListener("click", (evt) => {
+    if (evt.target === imageContainer) {
+      closePopup();
+    }
+  });
 }
