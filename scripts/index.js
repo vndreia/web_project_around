@@ -2,6 +2,7 @@
 const popupButton = document.querySelector(".main-bar__button-type-form");
 const popup = document.querySelector(".popup-edit-profile");
 const popupClose = document.querySelector(".popup__button-close");
+const popupEditProfile = document.querySelector(".popup-edit-profile");
 
 // ---> 2. Manipulate elements
 //Edit info popup
@@ -22,9 +23,7 @@ document.addEventListener("keydown", (evt) => {
     closePopUp();
   }
 });
-popup.addEventListener("click", (evt) => {
-  closePopUp();
-});
+
 // ---> 3. Create events
 
 //Form de edit
