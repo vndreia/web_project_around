@@ -54,9 +54,12 @@ document.addEventListener("keydown", (evt) => {
 });
 
 function createCard(cardData) {
+  //Clone template
   const newNode = cardTemplate.cloneNode(true); //Deep clone
   //Nuevo nodo (contenido de la card)
   //Seleccionar los elementos a modificar
+
+  //Assign values from template
   const title = newNode.querySelector(".card__image-text");
   const image = newNode.querySelector(".card__image");
   const deleteButton = newNode.querySelector(".card__trash-button");
@@ -65,8 +68,8 @@ function createCard(cardData) {
   title.textContent = cardData.name;
   image.src = cardData.link;
   image.alt = cardData.name;
-  //Añadir ahora sí el nuev o nodo al DOM
-  //3 Añadir Evento
+  
+  //Assign events
   deleteButton.addEventListener("click", (event) => {
     event.target.closest(".card__item").remove();
   });
@@ -148,3 +151,43 @@ function openImagePopup(src, altText, captionText) {
     }
   });
 }
+
+class Card {
+  constructor(cardData, cardTemplate) {
+this.cardData = cardData;
+this.cardTemplate = cardTemplate;
+this.card = null; //This means this is still not defined. This indicates a value, not a string. Thats's why we don't put an empty string "" instead.
+//This means this.card exists but its value its yet not defined.
+  }
+
+  //Methods
+createCard (){
+ 
+}
+
+cloneTemplate (){
+return this.cardTemplate.content
+.querySelector("#card__template")
+.cloneNode(true);
+}
+
+getDataTemplate(){
+this.card = this.cloneTemplate(); //Why?
+ this.card.querySelector(".card__image-text").textContent = this.cardData.name;
+ this.card.querySelector(".card__image").src = this.cardData.link;
+ return this.card;
+ 
+}
+
+setEventListeners(){
+  const deleteButton = this.card.querySelector(".card__trash-button"); //When you clone the template you save that node in this.card, so now all access comes from this.card
+  const likeButton = this.card.querySelector(".card__like-button");
+
+}
+}
+
+//Instantiate is always saved in a const
+
+const card = new card() //title and link
+
+card.createCard();
