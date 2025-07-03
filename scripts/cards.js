@@ -74,7 +74,7 @@ function createCard(cardData) {
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("active");
   });
-
+  //UTILS
   image.addEventListener("click", () => {
     openImagePopup(cardData.link, cardData.name, cardData.name);
   });
@@ -120,6 +120,7 @@ function handleForm(evt) {
 formAdd.addEventListener("submit", handleForm); // Aquí estamos escuchando el evento submit del formulario
 
 //Open the image popup section
+//UTILS
 function openImagePopup(src, altText, captionText) {
   const imageContainer = document.querySelector(".popup-image");
   const image = document.querySelector(".popup-image__img");
