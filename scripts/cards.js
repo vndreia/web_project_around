@@ -194,6 +194,7 @@ evt.target.closest(".card__item").remove();
 }
 }
 
+~
 
 //Instantiate is always saved in a const
 
