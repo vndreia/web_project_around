@@ -26,13 +26,13 @@ const initialCards = [
 ];
 
 //1 selección de elementos
-const cardsZone = document.querySelector(".cards");
-const cardTemplate = document.querySelector("#card__template").content; //se accede al contenido del template seleccionado
+export const cardsZone = document.querySelector(".cards");
+export const cardTemplate = document.querySelector("#card__template").content; //se accede al contenido del template seleccionado
 const cardContainer = document.querySelector(".card__item");
 const buttonClose = document.querySelector(".popup__button-close-place"); //Close button
 const buttonOpen = document.querySelector(".main-bar__button-type-add"); //Button to open the popup for adding a place
 const popupAddPlace = document.querySelector(".popup-add-place"); //Popup for adding a place
-/*UTILS
+
 function openPopup() {
   popupAddPlace.classList.add("popup_opened");
 }
@@ -51,7 +51,7 @@ document.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape") {
     closePopup();
   }
-});*/
+});
 
 function createCard(cardData) {
   //Clone template
@@ -78,18 +78,17 @@ function createCard(cardData) {
     likeButton.classList.toggle("active");
   });
 }
-/*  UTILS
+
   image.addEventListener("click", () => {
     openImagePopup(cardData.link, cardData.name, cardData.name);
   });
   return newNode;
-}*/
 
-/*NO SÉ QUE HACER CON RENDERCARDS
+
+
 function renderCards() {
   //Iterar 6 veces (num de cards)
   initialCards.forEach((cardData) => {
-    console.log(cardData, "cardData");
     //Creación de la card (clonación)
     const card = createCard(cardData);
     //Añadir card al DOM
@@ -97,7 +96,6 @@ function renderCards() {
   });
 }
 renderCards();
-*/
 
 //Form popup para agregar imagen
 //----> 1. Select DOM elements
@@ -155,7 +153,7 @@ function openImagePopup(src, altText, captionText) {
   });
 }
 
-class Card {
+export class Card {
   constructor(cardData, cardTemplate) {
 this.cardData = cardData;
 this.cardTemplate = cardTemplate;
@@ -164,7 +162,7 @@ this.card = null; //This means this is still not defined. This indicates a value
   }
 
   //Methods
-_createCard (){ 
+_renderCard (){ 
 }
 
 _cloneTemplate (){
@@ -194,7 +192,6 @@ evt.target.closest(".card__item").remove();
 }
 }
 
-~
 
 //Instantiate is always saved in a const
 

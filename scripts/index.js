@@ -67,3 +67,6 @@ enableValidation({
   inputErrorClass: "form__input-error",
   errorClass: "popup__error_visible",
 });
+
+import { cardsZone, cardTemplate } from "./cards.js";
+
