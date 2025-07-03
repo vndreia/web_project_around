@@ -32,7 +32,7 @@ const cardContainer = document.querySelector(".card__item");
 const buttonClose = document.querySelector(".popup__button-close-place"); //Close button
 const buttonOpen = document.querySelector(".main-bar__button-type-add"); //Button to open the popup for adding a place
 const popupAddPlace = document.querySelector(".popup-add-place"); //Popup for adding a place
-
+/*UTILS
 function openPopup() {
   popupAddPlace.classList.add("popup_opened");
 }
@@ -51,7 +51,7 @@ document.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape") {
     closePopup();
   }
-});
+});*/
 
 function createCard(cardData) {
   //Clone template
@@ -77,13 +77,15 @@ function createCard(cardData) {
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("active");
   });
-
+}
+/*  UTILS
   image.addEventListener("click", () => {
     openImagePopup(cardData.link, cardData.name, cardData.name);
   });
   return newNode;
-}
+}*/
 
+/*NO SÉ QUE HACER CON RENDERCARDS
 function renderCards() {
   //Iterar 6 veces (num de cards)
   initialCards.forEach((cardData) => {
@@ -95,6 +97,7 @@ function renderCards() {
   });
 }
 renderCards();
+*/
 
 //Form popup para agregar imagen
 //----> 1. Select DOM elements
@@ -157,34 +160,40 @@ class Card {
 this.cardData = cardData;
 this.cardTemplate = cardTemplate;
 this.card = null; //This means this is still not defined. This indicates a value, not a string. Thats's why we don't put an empty string "" instead.
-//This means this.card exists but its value its yet not defined.
+//This means this.card exists but its value its yet not defined. //Why?
   }
 
   //Methods
-createCard (){
- 
+_createCard (){ 
 }
 
-cloneTemplate (){
+_cloneTemplate (){
 return this.cardTemplate.content
 .querySelector("#card__template")
 .cloneNode(true);
 }
 
-getDataTemplate(){
-this.card = this.cloneTemplate(); //Why?
+_getDataTemplate(){
+this.card = this.cloneTemplate(); 
  this.card.querySelector(".card__image-text").textContent = this.cardData.name;
  this.card.querySelector(".card__image").src = this.cardData.link;
  return this.card;
  
 }
 
-setEventListeners(){
+_setEventListeners(){
   const deleteButton = this.card.querySelector(".card__trash-button"); //When you clone the template you save that node in this.card, so now all access comes from this.card
-  const likeButton = this.card.querySelector(".card__like-button");
+  const likeButton = this.card.querySelector(".card__like-button"); 
 
+  _this.deleteButton.addEventListener("click", (evt) => {
+evt.target.closest(".card__item").remove();
+  })
+  _this.likeButton.addEventListener("click", (evt) => {
+    likeButton.classList.toggle("active");
+  });
 }
 }
+
 
 //Instantiate is always saved in a const
 
