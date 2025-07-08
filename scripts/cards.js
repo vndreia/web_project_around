@@ -1,110 +1,12 @@
-const initialCards = [
-  {
-    name: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
-  },
-  {
-    name: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
-  },
-  {
-    name: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-  },
-];
+import { openImagePopup } from "./utils.js";
+
 
 //1 selección de elementos
-export const cardsZone = document.querySelector(".cards");
-export const cardTemplate = document.querySelector("#card__template").content; //se accede al contenido del template seleccionado
+const cardsZone = document.querySelector(".cards"); //EXPORTO ESO AL INDEX.JS???
+const cardTemplate = document.querySelector("#card__template").content; //se accede al contenido del template seleccionado
 const cardContainer = document.querySelector(".card__item");
-const buttonClose = document.querySelector(".popup__button-close-place"); //Close button
-const buttonOpen = document.querySelector(".main-bar__button-type-add"); //Button to open the popup for adding a place
-const popupAddPlace = document.querySelector(".popup-add-place"); //Popup for adding a place
 
-function openPopup() {
-  popupAddPlace.classList.add("popup_opened");
-}
-buttonOpen.addEventListener("click", openPopup);
-
-function closePopup() {
-  popupAddPlace.classList.remove("popup_opened");
-}
-buttonClose.addEventListener("click", closePopup);
-popupAddPlace.addEventListener("click", (evt) => {
-  if (evt.target === popupAddPlace) {
-    closePopup();
-  }
-});
-document.addEventListener("keydown", (evt) => {
-  if (evt.key === "Escape") {
-    closePopup();
-  }
-});
-
-function createCard(cardData) {
-  //Clone template
-  const newNode = cardTemplate.cloneNode(true); //Deep clone
-  //Nuevo nodo (contenido de la card)
-  //Seleccionar los elementos a modificar
-
-  //Assign values from template
-  const title = newNode.querySelector(".card__image-text");
-  const image = newNode.querySelector(".card__image");
-  const deleteButton = newNode.querySelector(".card__trash-button");
-  const likeButton = newNode.querySelector(".card__like-button");
-  //3 Funcionalidad o manipulación del DOM
-  title.textContent = cardData.name;
-  image.src = cardData.link;
-  image.alt = cardData.name;
-  
-  //Assign events
-  deleteButton.addEventListener("click", (event) => {
-    event.target.closest(".card__item").remove();
-  });
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("active");
-  });
-}
-
-  image.addEventListener("click", () => {
-    openImagePopup(cardData.link, cardData.name, cardData.name);
-  });
-  return newNode;
-
-
-
-function renderCards() {
-  //Iterar 6 veces (num de cards)
-  initialCards.forEach((cardData) => {
-    //Creación de la card (clonación)
-    const card = createCard(cardData);
-    //Añadir card al DOM
-    cardsZone.appendChild(card);
-  });
-}
-renderCards();
-
-//Form popup para agregar imagen
-//----> 1. Select DOM elements
-const addButton = document.querySelector(".main-bar__button-type-add");
-const formAdd = document.querySelector(".form__add");
-const addPlaceInput = document.querySelector(".form__input-place");
-const addLinkInput = document.querySelector(".form__input-link");
-
-//----> 2. Manipulate elements
+//Dónde pongo esto?
 function handleForm(evt) {
   evt.preventDefault();
   const name = addPlaceInput.value;
@@ -121,48 +23,21 @@ function handleForm(evt) {
   formAdd.reset(); // Limpia inputs
   closePopup(); // Cierra el popup
 }
-formAdd.addEventListener("submit", handleForm); // Aquí estamos escuchando el evento submit del formulario
-
-//Open the image popup section
-function openImagePopup(src, altText, captionText) {
-  const imageContainer = document.querySelector(".popup-image");
-  const image = document.querySelector(".popup-image__img");
-  const imageCaption = document.querySelector(".popup-image__caption");
-  const imageCloseButton = document.querySelector(".popup__button-close-image");
-
-  // Actualiza la imagen y el texto
-  image.src = src;
-  image.alt = altText;
-  imageCaption.textContent = captionText;
-
-  // Abre el popup
-  imageContainer.classList.add("popup_opened");
-
-  // Función para cerrar el popup
-  function closePopup() {
-    imageContainer.classList.remove("popup_opened");
-    imageCloseButton.removeEventListener("click", closePopup);
-  }
-
-  // Añade el listener para cerrar al botón
-  imageCloseButton.addEventListener("click", closePopup);
-  imageContainer.addEventListener("click", (evt) => {
-    if (evt.target === imageContainer) {
-      closePopup();
-    }
-  });
-}
+formAdd.addEventListener("submit", handleForm); 
 
 export class Card {
   constructor(cardData, cardTemplate) {
 this.cardData = cardData;
 this.cardTemplate = cardTemplate;
 this.card = null; //This means this is still not defined. This indicates a value, not a string. Thats's why we don't put an empty string "" instead.
-//This means this.card exists but its value its yet not defined. //Why?
+//This means this.card exists but its value its yet not defined. 
+//Will be defined when the template is cloned.
   }
 
   //Methods
 _renderCard (){ 
+  this._getDataTemplate();
+  return this.card;
 }
 
 _cloneTemplate (){
@@ -172,9 +47,10 @@ return this.cardTemplate.content
 }
 
 _getDataTemplate(){
-this.card = this.cloneTemplate(); 
+this.card = this._cloneTemplate(); 
  this.card.querySelector(".card__image-text").textContent = this.cardData.name;
  this.card.querySelector(".card__image").src = this.cardData.link;
+ this._setEventListeners();
  return this.card;
  
 }
@@ -182,12 +58,19 @@ this.card = this.cloneTemplate();
 _setEventListeners(){
   const deleteButton = this.card.querySelector(".card__trash-button"); //When you clone the template you save that node in this.card, so now all access comes from this.card
   const likeButton = this.card.querySelector(".card__like-button"); 
+  const image = this.card.querySelector(".card__image");
 
-  _this.deleteButton.addEventListener("click", (evt) => {
-evt.target.closest(".card__item").remove();
-  })
-  _this.likeButton.addEventListener("click", (evt) => {
+   deleteButton.addEventListener("click", (event) => {
+    event.target.closest(".card__item").remove();
+  });
+
+
+  likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("active");
+  });
+
+ image.addEventListener("click", () => {
+    openImagePopup(this.cardData.link);
   });
 }
 }

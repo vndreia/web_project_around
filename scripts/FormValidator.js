@@ -63,3 +63,4 @@ const enableValidation = (config) => {
 
 export { enableValidation };
 //This tells the browser it's ok to import this function in other files
+
