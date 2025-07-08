@@ -1,36 +1,59 @@
 //Popup ---> 1. Select DOM elements
-const popupButton = document.querySelector(".main-bar__button-type-form");
-const popup = document.querySelector(".popup-edit-profile");
-const popupClose = document.querySelector(".popup__button-close");
+import { openProfilePopup, openProfileButton, popupProfile, closeProfilePopup, closeProfileButton, popupAddPlace, openAddPopup, closeAddPopup, addButton, openImagePopup } from "./utils.js"; //Goes a the top and mixes functions and vars
+import { enableValidation } from "./FormValidator.js"; //Importing the validation function
+import { Card } from "./cards.js";
 
-// ---> 2. Manipulate elements
-//Edit info popup
-function openPopUp() {
-  popup.classList.add("popup_opened"); //Adds the class to popup, not the button
-}
-popupButton.addEventListener("click", openPopUp); //Adds the event to the button, not the class
 
-//Close popup
-function closePopUp() {
-  popup.classList.remove("popup_opened");
-}
-//Here goes the esc to close popup
-popupClose.addEventListener("click", closePopUp);
-document.addEventListener("keydown", (evt) => {
-  //Remember evt.keys work only in the whole document, not in a specific element
+const initialCards = [
+  {
+    name: "Valle de Yosemite",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+  },
+  {
+    name: "Lago Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
+  },
+  {
+    name: "Montañas Calvas",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
+  },
+  {
+    name: "Parque Nacional de la Vanoise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
+  },
+];
+
+//AQUÍ QUÉ PASÓ?
+  initialCards.forEach((card) => {
+    const newCard = new Card(card, template)
+    const newNode = newCard._renderCard();
+    cardsZone.appendChild(card);
+  });
+
+openProfileButton.addEventListener("click", openProfilePopup); //Adds the event to the button, not the class
+
+closeProfileButton.addEventListener("click", closeProfilePopup);
+document.addEventListener("keydown", (evt) => { //Remember evt.keys work only in the whole document, not in a specific element
   if (evt.key === "Escape") {
-    closePopUp();
+    closeProfilePopup();
   }
 });
-popup.addEventListener("click", (evt) => {
-  if (evt.target === popup) {
-    closePopUp();
+popupProfile.addEventListener("click", (evt) => {
+  if (evt.target === popupProfile) {
+    closeProfilePopup();
   }
 });
 
-// ---> 3. Create events
 
-//Form de edit
+//Edit profile form 
 const formElement = document.querySelector(".form");
 console.log(formElement);
 const inputName = document.querySelector(".form__input-type-name");
@@ -57,8 +80,7 @@ function handleSubmit(evt) {
 formElement.addEventListener("submit", handleSubmit); // Aquí estamos escuchando el evento submit del formulario
 console.log(editName, editJob);
 
-import { enableValidation } from "./validate.js"; //Importing the validation function
-//This notation is a pain in the *** but it makes the code reusable:
+//This notation is hard, but makes the code reusable:
 enableValidation({
   formSelector: ".form",
   inputSelector: ".form__input",
@@ -68,5 +90,18 @@ enableValidation({
   errorClass: "popup__error_visible",
 });
 
-import { cardsZone, cardTemplate } from "./cards.js";
 
+//Add image popup
+addButton.addEventListener("click", openAddPopup);
+
+buttonClose.addEventListener("click", closeAddPopup);
+popupAddPlace.addEventListener("click", (evt) => {
+  if (evt.target === popupAddPlace) {
+    closeAddPopup();
+  }
+});
+document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    closeAddPopup();
+  }
+});
