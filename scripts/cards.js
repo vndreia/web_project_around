@@ -1,29 +1,6 @@
 import { openImagePopup } from "./utils.js";
 
-
 //1 selección de elementos
-const cardsZone = document.querySelector(".cards"); //EXPORTO ESO AL INDEX.JS???
-const cardTemplate = document.querySelector("#card__template").content; //se accede al contenido del template seleccionado
-const cardContainer = document.querySelector(".card__item");
-
-//Dónde pongo esto?
-function handleForm(evt) {
-  evt.preventDefault();
-  const name = addPlaceInput.value;
-  const link = addLinkInput.value;
-
-  if (!name || !link) {
-    alert("Por favor, completa los campos");
-    return;
-  }
-  const cardData = { name, link };
-  const card = createCard(cardData);
-  cardsZone.appendChild(card);
-
-  formAdd.reset(); // Limpia inputs
-  closePopup(); // Cierra el popup
-}
-formAdd.addEventListener("submit", handleForm); 
 
 export class Card {
   constructor(cardData, cardTemplate) {
@@ -41,8 +18,7 @@ _renderCard (){
 }
 
 _cloneTemplate (){
-return this.cardTemplate.content
-.querySelector("#card__template")
+return this.cardTemplate
 .cloneNode(true);
 }
 
@@ -70,14 +46,10 @@ _setEventListeners(){
   });
 
  image.addEventListener("click", () => {
-    openImagePopup(this.cardData.link);
+    openImagePopup(this.cardData.link, this.cardData.name, this.cardData.name);
   });
 }
 }
 
 
-//Instantiate is always saved in a const
 
-const card = new card() //title and link
-
-card.createCard();
