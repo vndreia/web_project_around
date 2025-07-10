@@ -49,15 +49,16 @@
   margin: 0 auto;
 }
 
-.popup__button-close {
+.popup__button-close { /*Add card*/
   background: url(../images/close-icon.svg) center no-repeat;
   width: 50px;
   height: 50px;
   border: none;
-  align-self: flex-end;
+  position: relative;
+  left: 400px;
 }
 
-.popup__button-close-place {
+.popup__button-close-profile {
   background: url(../images/close-icon.svg) center no-repeat;
   width: 50px;
   height: 50px;
