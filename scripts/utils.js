@@ -44,9 +44,10 @@ export function closeProfilePopup() {
 //ADD IMAGE POPUP
 export const popupAddPlace = document.querySelector(".popup-add-place"); //Add card
 export const addButton = document.querySelector(".main-bar__button-type-add");
-const formAdd = document.querySelector(".form__add");
-const addPlaceInput = document.querySelector(".form__input-place");
-const addLinkInput = document.querySelector(".form__input-link");
+export const formAdd = document.querySelector(".form__add");
+export const addPlaceInput = document.querySelector(".form__input-place");
+export const addLinkInput = document.querySelector(".form__input-link");
+export const closeAddButton = document.querySelector(".popup__button-close-place");
 
 export function openAddPopup() {
   popupAddPlace.classList.add("popup_opened");

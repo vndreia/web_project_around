@@ -12,6 +12,10 @@ import {
   initialCards,
   cardTemplate,
   cardsZone,
+  formAdd,
+  addPlaceInput,
+  addLinkInput,
+  closeAddButton
 } from "./utils.js"; //Goes a the top and mixes functions and vars
 import { enableValidation } from "./FormValidator.js"; //Importing the validation function
 import { Card } from "./cards.js";
@@ -86,18 +90,21 @@ function handleForm(evt) {
     alert("Por favor, completa los campos");
     return;
   }
+  //Aquí siento que tengo que cambiar algo pero no sé qué
   const cardData = { name, link };
-  const card = createCard(cardData);
-  cardsZone.appendChild(card);
+    const newCard = new Card(cardData, cardTemplate);
+  const newNode = newCard._renderCard();
+  cardsZone.prepend(newNode); 
+
 
   formAdd.reset(); // Limpia inputs
-  closePopup(); // Cierra el popup
+  closeAddPopup(); // Cierra el popup
 }
 
 formAdd.addEventListener("submit", handleForm);
 addButton.addEventListener("click", openAddPopup);
 
-buttonClose.addEventListener("click", closeAddPopup);
+closeAddButton.addEventListener("click", closeAddPopup);
 popupAddPlace.addEventListener("click", (evt) => {
   if (evt.target === popupAddPlace) {
     closeAddPopup();
