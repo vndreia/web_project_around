@@ -1,52 +1,53 @@
-/*En lugar de seleccionar manualmente los inputs y botones fuera de la función, los seleccionas dentro de enableValidation() 
-usando los selectores que recibes como parámetros. Eso hace tu función mucho más reutilizable y elegante.*/
-//The function to show the default browser error message:
-const showError = (input, config) => {
+
+export class FormValidator {
+ constructor(config) { //Config is the 'template' and formElement is any form to select
+ this.config = config;
+ }
+
+ _showError = (input) => {
   const errorElement = document.querySelector(`#${input.id}-error`); //Template literal selects a dynamic ID linked to span
   errorElement.textContent = input.validationMessage;
-  errorElement.classList.add(config.errorClass); //errorClass is a property from the 'config' obj
+  errorElement.classList.add(this.config.errorClass); //errorClass is a property from the 'config' obj
 };
 
-const hideError = (input, config) => {
+_hideError = (input) => {
   const errorElement = document.querySelector(`#${input.id}-error`); //Template literal selects a dynamic ID linked to span
   errorElement.textContent = ""; //Empty string to reset the validationMessage set by default
-  errorElement.classList.remove(config.errorClass);
+  errorElement.classList.remove(this.config.errorClass);
 };
 
-//Function that verifies inputs validity
-const checkInputValidity = (input, config) => {
-  console.log(`Verificando: ${input.id}, válido: ${input.validity.valid}`);
+ _checkInputValidity = (input) => { 
   if (input.validity.valid) {
-    hideError(input, config);
-    input.classList.remove(config.inputErrorClass); //Cleans up error class
+    this._hideError(input);
+    input.classList.remove(this.config.inputErrorClass);
   } else {
-    showError(input, config);
-    input.classList.add(config.inputErrorClass); //Highlights the wrong input
+    this._showError(input); 
+    input.classList.add(this.config.inputErrorClass); 
   }
 };
 
-const toggleButtonState = (formElement, button, config) => {
-  const inputs = Array.from(formElement.querySelectorAll(config.inputSelector)); //Array allow us to verify each input
+_toggleButtonState = (formElement, button) => { 
+  const inputs = Array.from(formElement.querySelectorAll(this.config.inputSelector)); //Array allow us to verify each input
   const isValid = inputs.every((input) => input.validity.valid); //Checks if all inputs are valid
 
   if (isValid) {
     button.disabled = false; //Enables the button
-    button.classList.remove(config.inactiveButtonClass); //Removes the class that disables the button
+    button.classList.remove(this.config.inactiveButtonClass); //Removes the class that disables the button
   } else {
     button.disabled = true; //Disables the button
-    button.classList.add(config.inactiveButtonClass); //Adds the class that disables the button
+    button.classList.add(this.config.inactiveButtonClass); //Adds the class that disables the button
   }
 };
 
-const setEventListeners = (formElement, config) => {
-  const inputs = formElement.querySelectorAll(config.inputSelector); //When I select that, a NodeList is created
-  const button = formElement.querySelector(config.submitButtonSelector);
-  toggleButtonState(formElement, button, config);
+_setEventListeners = (formElement) => {
+  const inputs = formElement.querySelectorAll(this.config.inputSelector); //When I select that, a NodeList is created
+  const button = formElement.querySelector(this.config.submitButtonSelector);
+  this._toggleButtonState(formElement, button);
 
   inputs.forEach((input) => {
-    input.addEventListener("input", () => {
-      checkInputValidity(input, config);
-      toggleButtonState(formElement, button, config);
+    input.addEventListener("input", () => { //Input is the event that appears when the user writes in a input
+      this._checkInputValidity(input);
+      this._toggleButtonState(formElement, button);
     });
   });
   formElement.addEventListener("submit", (evt) => {
@@ -54,14 +55,11 @@ const setEventListeners = (formElement, config) => {
   });
 };
 
-const enableValidation = (config) => {
-  const forms = document.querySelectorAll(config.formSelector);
+_enableValidation = () => {
+  const forms = document.querySelectorAll(this.config.formSelector); //Access to the form template
   forms.forEach((form) => {
-    setEventListeners(form, config);
+    this._setEventListeners(form);
   });
-};
 
-export { enableValidation };
-//This tells the browser it's ok to import this function in other files
-
-//FormValidator
+}
+}

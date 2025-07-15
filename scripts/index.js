@@ -17,9 +17,8 @@ import {
   addLinkInput,
   closeAddButton
 } from "./utils.js"; //Goes a the top and mixes functions and vars
-import { enableValidation } from "./FormValidator.js"; //Importing the validation function
 import { Card } from "./cards.js";
-
+import { FormValidator } from "./FormValidator.js";
 
 //Instantiate is saved in a const
 initialCards.forEach((card) => {
@@ -54,6 +53,7 @@ const editName = document.querySelector(".main-bar__title");
 console.log(editName);
 const editJob = document.querySelector(".main-bar__paragraph");
 console.log(editJob);
+
 //Manipulation
 function handleSubmit(evt) {
   evt.preventDefault(); // Previene el comportamiento por defecto del formulario (que recargue la página)
@@ -63,7 +63,7 @@ function handleSubmit(evt) {
 
   editName.textContent = name; // Actualizar el nombre en la parte visible
   editJob.textContent = job; // Actualizar el 'about' en la parte visible
-  popup.classList.remove("popup_opened"); // Cerrar el popup después de enviar el formulario
+  popupProfile.classList.remove("popup_opened"); // Cerrar el popup después de enviar el formulario
 }
 
 //Eventos
@@ -71,7 +71,7 @@ formElement.addEventListener("submit", handleSubmit); // Aquí estamos escuchand
 console.log(editName, editJob);
 
 //This notation is hard, but makes the code reusable:
-enableValidation({
+const formValidator = new FormValidator({
   formSelector: ".form",
   inputSelector: ".form__input",
   submitButtonSelector: ".form__button-save",
@@ -80,6 +80,7 @@ enableValidation({
   errorClass: "popup__error_visible",
 });
 
+formValidator._enableValidation();
 //Add image popup
 function handleForm(evt) {
   evt.preventDefault();
