@@ -139,9 +139,10 @@
 .popup__error_visible { /* Class to show the error message */
   display: block;
   color: red;
-  align-items: center;
-
+  width: 200px;
+  align-self: center;
 }
+
 
 .form__button_disabled  {  /*class applied when inputs in the form are invalid*/
   background-color: #fff;
@@ -178,5 +179,9 @@ outline: none; /*outline removes the automatic field around the input set by def
   .form__button-save {
     max-width: 238px;
     margin: 40px auto;
+  }
+
+  .popup__button-close {
+    left: auto;
   }
 }
