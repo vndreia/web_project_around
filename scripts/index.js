@@ -15,16 +15,23 @@ import {
   formAdd,
   addPlaceInput,
   addLinkInput,
-  closeAddButton
+  closeAddButton,
 } from "./utils.js"; //Goes a the top and mixes functions and vars
-import { Card } from "./cards.js";
+import { Card } from "..components/Card.js";
 import { FormValidator } from "./FormValidator.js";
+import { Section } from "../components/Section.js"; //Importing the class Section
 
 //Instantiate is saved in a const
-initialCards.forEach((card) => {
+/*initialCards.forEach((card) => {
   const newCard = new Card(card, cardTemplate);
   const newNode = newCard._renderCard();
-  cardsZone.appendChild(newNode); 
+  cardsZone.appendChild(newNode);
+});*/
+
+const section = new Section(initialCards, (card) => {
+  const newCard = new Card(card, cardTemplate);
+  const newNode = newCard._renderCard();
+  cardsZone.appendChild(newNode);
 });
 
 openProfileButton.addEventListener("click", openProfilePopup); //Adds the event to the button, not the class
@@ -93,10 +100,9 @@ function handleForm(evt) {
   }
   //Aquí siento que tengo que cambiar algo pero no sé qué
   const cardData = { name, link };
-    const newCard = new Card(cardData, cardTemplate);
+  const newCard = new Card(cardData, cardTemplate);
   const newNode = newCard._renderCard();
-  cardsZone.prepend(newNode); 
-
+  cardsZone.prepend(newNode);
 
   formAdd.reset(); // Limpia inputs
   closeAddPopup(); // Cierra el popup
