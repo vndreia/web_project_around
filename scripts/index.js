@@ -17,8 +17,8 @@ import {
   addLinkInput,
   closeAddButton,
 } from "./utils.js"; //Goes a the top and mixes functions and vars
-import { Card } from "..components/Card.js";
-import { FormValidator } from "./FormValidator.js";
+import { Card } from "../components/Card.js"; //Importing the class Card
+import { FormValidator } from "../components/FormValidator.js"; //Importing the class FormValidator
 import { Section } from "../components/Section.js"; //Importing the class Section
 
 //Instantiate is saved in a const
@@ -28,11 +28,19 @@ import { Section } from "../components/Section.js"; //Importing the class Sectio
   cardsZone.appendChild(newNode);
 });*/
 
-const section = new Section(initialCards, (card) => {
-  const newCard = new Card(card, cardTemplate);
-  const newNode = newCard._renderCard();
-  cardsZone.appendChild(newNode);
-});
+//This is the renderer function!!!!!!! that will show the cards in the section
+//Card is passed as a new instance inside the Section class
+//Notice how the new Section instance takes three parameters: items, renderer, and container
+const section = new Section(
+  initialCards,
+  (card) => {
+    const newCard = new Card(card, cardTemplate);
+    return newCard._renderCard();
+  },
+  cardsZone
+);
+
+section.renderItems(); //Calling the renderItems method to render all cards
 
 openProfileButton.addEventListener("click", openProfilePopup); //Adds the event to the button, not the class
 
