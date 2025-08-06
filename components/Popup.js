@@ -1,6 +1,7 @@
 export class Popup {
   constructor(container) {
     this.container = container;
+    this.closeButton = container.querySelector(".popup__button-close");
   }
   open() {
     this.container.classList.add("popup_opened");
@@ -11,12 +12,9 @@ export class Popup {
 
   _handleEscClose(evt) {
     // Closes the popup when Escape is pressed
-    console.log(evt.key, "KEY pressed");
-    document.addEventListener(keydown, (evt) => {
-      if (evt.key === "Escape") {
-        this.close();
-      }
-    });
+    if (evt.key === "Escape") {
+      this.close(evt);
+    }
   }
 
   setEventListeners() {

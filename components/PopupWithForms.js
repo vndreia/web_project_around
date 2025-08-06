@@ -5,10 +5,15 @@ class PopupWithForm extends Popup {
     super(selector);
   }
 
-  _getInputValues() {} //Gathers data from the form inputs
+  _getInputValues() {
+    const form = document.querySelector(".form");
+    const inputs = form.querySelectorAll(".form__input");
+    const values = {};
+    };
+  } //Gathers data from the form inputs
 
   setEventListeners() {
+    super.setEventListeners(); //Calls the setEventListeners method from Popup
     super.close; //Calls the close method from Popup
     //Restarts the form:
   }
-}
