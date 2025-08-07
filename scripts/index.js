@@ -1,6 +1,6 @@
 //Popup ---> 1. Select DOM elements
 import {
-  openProfilePopup,
+  openProfilePopup, //Esta se va???
   openProfileButton,
   popupProfile,
   closeProfilePopup,
@@ -20,15 +20,10 @@ import {
 import { Card } from "../components/Card.js"; //Importing the class Card
 import { FormValidator } from "../components/FormValidator.js"; //Importing the class FormValidator
 import { Section } from "../components/Section.js"; //Importing the class Section
-
+import { PopupWithForm } from "../components/PopupWithForms.js"; //Importing the class PopupWithForm
 //Instantiate is saved in a const
-/*initialCards.forEach((card) => {
-  const newCard = new Card(card, cardTemplate);
-  const newNode = newCard._renderCard();
-  cardsZone.appendChild(newNode);
-});*/
 
-//This is the renderer function!!!!!!! that will show the cards in the section
+//This is the renderer function that will show the cards in the section
 //Card is passed as a new instance inside the Section class
 //Notice how the new Section instance takes three parameters: items, renderer, and container
 const section = new Section(
@@ -42,48 +37,35 @@ const section = new Section(
 
 section.renderItems(); //Calling the renderItems method to render all cards
 
-openProfileButton.addEventListener("click", openProfilePopup); //Adds the event to the button, not the class
+//Instantiate 2 PopupWithForm classes
+const profilePopup = new PopupWithForm(popupProfile, handleForm);
+profilePopup.setEventListeners(); //Setting event listeners for the profile popup
+const addPlacePopup = new PopupWithForm(popupAddPlace, handleForm);
 
-closeProfileButton.addEventListener("click", closeProfilePopup);
-document.addEventListener("keydown", (evt) => {
-  //Remember evt.keys work only in the whole document, not in a specific element
-  if (evt.key === "Escape") {
-    closeProfilePopup();
-  }
-});
-popupProfile.addEventListener("click", (evt) => {
-  if (evt.target === popupProfile) {
-    closeProfilePopup();
-  }
-});
-
-//Edit profile form
+//Edit profile form //ESTO DEBERÍA ESTAR EN UTILS?
 const formElement = document.querySelector(".form");
-console.log(formElement);
 const inputName = document.querySelector(".form__input-type-name");
-console.log(inputName);
 const inputJob = document.querySelector(".form__input-type-about");
-console.log(inputJob);
 const editName = document.querySelector(".main-bar__title");
-console.log(editName);
 const editJob = document.querySelector(".main-bar__paragraph");
-console.log(editJob);
 
 //Manipulation
-function handleSubmit(evt) {
-  evt.preventDefault(); // Previene el comportamiento por defecto del formulario (que recargue la página)
-
-  const name = inputName.value; // Obtener el valor del campo 'name'
-  const job = inputJob.value; // Obtener el valor del campo 'about'
-
-  editName.textContent = name; // Actualizar el nombre en la parte visible
-  editJob.textContent = job; // Actualizar el 'about' en la parte visible
-  popupProfile.classList.remove("popup_opened"); // Cerrar el popup después de enviar el formulario
+function handleForm(values) {
+  //HELP  esto solo es el handle form del profilePopup, no del addPlacePopup //Cómo funciona??
+  inputName.textContent = values.name; //Updates the input values in the form
+  inputJob.textContent = values.job; //Updates the input values in the form
+  profilePopup.close(); // Cerrar el popup después de actualizar
 }
+//Open profile popup
+openProfileButton.addEventListener("click", () => {
+  profilePopup.open(); //Opens the profile popup when the button is clicked
+});
+//Close profile popup
+closeProfileButton.addEventListener("click", () => {
+  profilePopup.close(); //Closes the profile popup when the close button is clicked
+});
 
 //Eventos
-formElement.addEventListener("submit", handleSubmit); // Aquí estamos escuchando el evento submit del formulario
-console.log(editName, editJob);
 
 //This notation is hard, but makes the code reusable:
 const formValidator = new FormValidator({
@@ -96,8 +78,9 @@ const formValidator = new FormValidator({
 });
 
 formValidator._enableValidation();
-//Add image popup
-function handleForm(evt) {
+
+//Add image popup  //ESTÁ SERÍA LA HANDLEDATA
+function handleImageForm(evt) {
   evt.preventDefault();
   const name = addPlaceInput.value;
   const link = addLinkInput.value;
@@ -106,14 +89,6 @@ function handleForm(evt) {
     alert("Por favor, completa los campos");
     return;
   }
-  //Aquí siento que tengo que cambiar algo pero no sé qué
-  const cardData = { name, link };
-  const newCard = new Card(cardData, cardTemplate);
-  const newNode = newCard._renderCard();
-  cardsZone.prepend(newNode);
-
-  formAdd.reset(); // Limpia inputs
-  closeAddPopup(); // Cierra el popup
 }
 
 formAdd.addEventListener("submit", handleForm);
