@@ -1,9 +1,13 @@
 //PROFILE POPUP
-export const openProfileButton = document.querySelector(".main-bar__button-type-form"); //Edit profile
+export const openProfileButton = document.querySelector(
+  ".main-bar__button-type-form"
+); //Edit profile
 export const popupProfile = document.querySelector(".popup-edit-profile"); //Edit profile
-export const closeProfileButton = document.querySelector(".popup__button-close-profile"); //Edit profile
+export const closeProfileButton = document.querySelector(
+  ".popup__button-close-profile"
+); //Edit profile
 export const cardTemplate = document.querySelector("#card__template").content; //se accede al contenido del template seleccionado
-export const cardsZone = document.querySelector(".cards"); 
+export const cardsZone = document.querySelector(".cards");
 export const initialCards = [
   {
     name: "Valle de Yosemite",
@@ -31,35 +35,18 @@ export const initialCards = [
   },
 ];
 
-export function openProfilePopup() {
-  popupProfile.classList.add("popup_opened"); //Adds the class to popup, not the button
-  
-}
-
-export function closeProfilePopup() {
-  popupProfile.classList.remove("popup_opened");
-}
-
-
 //ADD IMAGE POPUP
 export const popupAddPlace = document.querySelector(".popup-add-place"); //Add card
 export const addButton = document.querySelector(".main-bar__button-type-add");
 export const formAdd = document.querySelector(".form__add");
 export const addPlaceInput = document.querySelector(".form__input-place");
 export const addLinkInput = document.querySelector(".form__input-link");
-export const closeAddButton = document.querySelector(".popup__button-close-place");
-
-export function openAddPopup() {
-  popupAddPlace.classList.add("popup_opened");
-}
-
-export function closeAddPopup() {
-  popupAddPlace.classList.remove("popup_opened");
-}
-
+export const closeAddButton = document.querySelector(
+  ".popup__button-close-place"
+);
 
 //CARDS POPUP
-export function openImagePopup(src, altText, captionText) { 
+export function openImagePopup(src, altText, captionText) {
   const imageContainer = document.querySelector(".popup-image");
   const image = document.querySelector(".popup-image__img");
   const imageCaption = document.querySelector(".popup-image__caption");
@@ -86,4 +73,3 @@ export function openImagePopup(src, altText, captionText) {
     }
   });
 }
-
