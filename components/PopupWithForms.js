@@ -3,7 +3,8 @@ import { Popup } from "./Popup.js";
 export class PopupWithForm extends Popup {
   constructor(selector, handleData) {
     super(selector);
-    this.form = document.querySelector(".form");
+    this.selector = selector;
+    this.form = this.selector;
     this.inputs = this.form.querySelectorAll(".form__input");
     this.handleData = handleData; //Function to handle form data
   }
@@ -32,7 +33,6 @@ export class PopupWithForm extends Popup {
 
   close() {
     super.close(); //Calls the close method from Popup
-    this.form.reset(); //Restores the form to its original values after closing
   }
 
   open() {

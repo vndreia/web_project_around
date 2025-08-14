@@ -47,11 +47,13 @@ const editName = document.querySelector(".main-bar__title"); ///????
 const editJob = document.querySelector(".main-bar__paragraph"); //COMO AGREGO LOS CAMBIOS AQUÍ??
 
 function handleForm(values) {
-  console.log("values", values);
-  editName.textContent = values.name; //Updates the input values in the form
-  editJob.textContent = values.about; //Updates the input values in the form
-  //No se estaban agregando los valores al perfil
-  profilePopup.close(); // Cerrar el popup después de actualizar
+  console.log(values, "values"); //Logs the values from the form inputs
+  if (values) {
+    editName.textContent = values.name; //Updates the input values in the form
+    editJob.textContent = values.about; //Updates the input values in the form
+
+    profilePopup.close(); // Cerrar el popup después de actualizar
+  }
 }
 
 //Open profile popup
@@ -70,11 +72,13 @@ const addPlacePopup = new PopupWithForm(popupAddPlace, (values) => {
 addPlacePopup.setEventListeners(); //Setting event listeners for the add place popup
 
 function handlePlace(values) {
-  /* addPlaceInput.value = //No sé qué agregar aquí
-  addLinkInput.value = //Ni aquí*/
-  const newCard = new Card(values, cardTemplate);
+  const formattedValues = { name: values.place, link: values.link };
+  const newCard = new Card(formattedValues, cardTemplate);
   const cardImage = newCard._renderCard();
   section.addItem(cardImage); //Adds the new card to the section
+  addPlacePopup.close(); // Closes the popup after adding the card
+  addPlaceInput.value = ""; //"" empty space
+  addLinkInput.value = ""; //Resets the input values after adding the card
 }
 
 //Open and close popupAddPlace
