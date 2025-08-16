@@ -35,6 +35,13 @@ export const initialCards = [
   },
 ];
 
+//IMAGE POPUP
+export const imageContainer = document.querySelector(".popup-image");
+export const cardImage = imageContainer.querySelector(".card__image");
+export const imagePopupCloseButton = document.querySelector(
+  ".popup__button-close-image"
+);
+
 //ADD IMAGE POPUP
 export const popupAddPlace = document.querySelector(".popup-add-place"); //Add card
 export const addButton = document.querySelector(".main-bar__button-type-add");
@@ -44,32 +51,3 @@ export const addLinkInput = document.querySelector(".form__input-link");
 export const closeAddButton = document.querySelector(
   ".popup__button-close-place"
 );
-
-//CARDS POPUP
-export function openImagePopup(src, altText, captionText) {
-  const imageContainer = document.querySelector(".popup-image");
-  const image = document.querySelector(".popup-image__img");
-  const imageCaption = document.querySelector(".popup-image__caption");
-  const imageCloseButton = document.querySelector(".popup__button-close-image");
-  // Actualiza la imagen y el texto
-  image.src = src;
-  image.alt = altText;
-  imageCaption.textContent = captionText;
-
-  // Abre el popup
-  imageContainer.classList.add("popup_opened");
-
-  // Función para cerrar el popup
-  function closePopup() {
-    imageContainer.classList.remove("popup_opened");
-    imageCloseButton.removeEventListener("click", closePopup);
-  }
-
-  // Añade el listener para cerrar al botón
-  imageCloseButton.addEventListener("click", closePopup);
-  imageContainer.addEventListener("click", (evt) => {
-    if (evt.target === imageContainer) {
-      closePopup();
-    }
-  });
-}

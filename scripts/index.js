@@ -11,13 +11,15 @@ import {
   closeAddButton,
   addPlaceInput,
   addLinkInput,
+  imageContainer,
+  imagePopupCloseButton,
 } from "./utils.js"; //Goes a the top and mixes functions and vars
 import { Card } from "../components/Card.js"; //Importing the class Card
 import { FormValidator } from "../components/FormValidator.js"; //Importing the class FormValidator
 import { Section } from "../components/Section.js"; //Importing the class Section
 import { PopupWithForm } from "../components/PopupWithForms.js"; //Importing the class PopupWithForm
 //Instantiate is saved in a const
-
+import { PopupWithImage } from "../components/PopupWithImage.js"; //Importing the class PopupWithImage
 //RENDER CARDS
 //This is the renderer function that will show the cards in the section
 //Card is passed as a new instance inside the Section class
@@ -90,7 +92,10 @@ closeAddButton.addEventListener("click", () => {
   addPlacePopup.close();
 });
 
-//Eventos
+//Show image popup
+export const imagePopup = new PopupWithImage(imageContainer);
+
+imagePopup.close();
 
 //This notation is hard, but makes the code reusable:
 const formValidator = new FormValidator({

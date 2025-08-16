@@ -1,7 +1,6 @@
-import { openImagePopup } from "../scripts/utils.js";
-
-//1 selección de elementos
-
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { imageContainer } from "../scripts/utils.js";
+const imagePopup = new PopupWithImage(imageContainer);
 export class Card {
   constructor(cardData, cardTemplate) {
     this.cardData = cardData;
@@ -18,10 +17,12 @@ export class Card {
   }
 
   _cloneTemplate() {
+    //1
     return this.cardTemplate.cloneNode(true);
   }
 
   _getDataTemplate() {
+    //2
     this.card = this._cloneTemplate();
     this.card.querySelector(".card__image-text").textContent =
       this.cardData.name;
@@ -44,11 +45,20 @@ export class Card {
     });
 
     image.addEventListener("click", () => {
-      openImagePopup(
+      //The open method was imported from PopupWithImage
+      imagePopup.open(
         this.cardData.link,
         this.cardData.name,
         this.cardData.name
-      );
+      ); //Defines the parameters inside to get the values straight from the cardData object
     });
+    //Pretty much as:
+    /* but cardImage here is cardData
+    cardImage.setEventListeners("click", () => {
+      const src = cardImage.src;
+      const altText = cardImage.alt;
+      const captionText = cardImage.textContent.caption;
+      imagePopup.open(src, altText, captionText);
+    });*/
   }
 }
