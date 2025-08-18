@@ -1,13 +1,11 @@
-import { PopupWithImage } from "../components/PopupWithImage.js";
-import { imageContainer } from "../scripts/utils.js";
-const imagePopup = new PopupWithImage(imageContainer);
 export class Card {
-  constructor(cardData, cardTemplate) {
+  constructor(cardData, cardTemplate, handleCardClick) {
+    //Third parameter as a function to open the image popup
     this.cardData = cardData;
     this.cardTemplate = cardTemplate;
     this.card = null; //This means this is still not defined. This indicates a value, not a string. Thats's why we don't put an empty string "" instead.
-    //This means this.card exists but its value its yet not defined.
-    //Will be defined when the template is cloned.
+    this.handleCardClick = handleCardClick;
+    //This means this.card exists but its value its yet not defined, Will be defined when the template is cloned.
   }
 
   //Methods
@@ -45,8 +43,7 @@ export class Card {
     });
 
     image.addEventListener("click", () => {
-      //The open method was imported from PopupWithImage
-      imagePopup.open(
+      this.handleCardClick(
         this.cardData.link,
         this.cardData.name,
         this.cardData.name

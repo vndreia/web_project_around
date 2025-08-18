@@ -6,6 +6,8 @@ export const popupProfile = document.querySelector(".popup-edit-profile"); //Edi
 export const closeProfileButton = document.querySelector(
   ".popup__button-close-profile"
 ); //Edit profile
+export const editName = document.querySelector(".main-bar__title");
+export const editJob = document.querySelector(".main-bar__paragraph");
 export const cardTemplate = document.querySelector("#card__template").content; //se accede al contenido del template seleccionado
 export const cardsZone = document.querySelector(".cards");
 export const initialCards = [

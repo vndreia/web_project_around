@@ -12,22 +12,31 @@ import {
   addPlaceInput,
   addLinkInput,
   imageContainer,
-  imagePopupCloseButton,
-} from "./utils.js"; //Goes a the top and mixes functions and vars
-import { Card } from "../components/Card.js"; //Importing the class Card
-import { FormValidator } from "../components/FormValidator.js"; //Importing the class FormValidator
-import { Section } from "../components/Section.js"; //Importing the class Section
-import { PopupWithForm } from "../components/PopupWithForms.js"; //Importing the class PopupWithForm
-//Instantiate is saved in a const
-import { PopupWithImage } from "../components/PopupWithImage.js"; //Importing the class PopupWithImage
+  editName,
+  editJob,
+} from "./utils.js"; //Import goes a the top and can mix functions and vars
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
+import { PopupWithForm } from "../components/PopupWithForms.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { UserInfo } from "../components/UserInfo.js";
+//Instantiate is always saved in a
+//imagePopup2 is created before imagePopup, because its functionality is to open the image popup when a card is clicked
+//This means imagePopup2 has to be created before any card is created, so the function can be passed as a parameter when creating a new Card instance
+const imagePopup2 = new PopupWithImage(imageContainer);
 //RENDER CARDS
 //This is the renderer function that will show the cards in the section
 //Card is passed as a new instance inside the Section class
 //Notice how the new Section instance takes three parameters: items, renderer, and container
+//The renderer function is passed as a callback with data, title, and title2 parameters as link, altText and title
+//The renderer function is responsible for creating a new Card instance and returning the rendered card element
 const section = new Section(
   initialCards,
   (card) => {
-    const newCard = new Card(card, cardTemplate);
+    const newCard = new Card(card, cardTemplate, (data, title, title2) =>
+      imagePopup2.open(data, title, title2)
+    ); //Se pasa la función que abre el popup
     return newCard._renderCard();
   },
   cardsZone
@@ -41,22 +50,11 @@ const profilePopup = new PopupWithForm(popupProfile, (values) => {
 });
 profilePopup.setEventListeners(); //Setting event listeners for the profile popup
 
-//Edit profile form //ESTO DEBERÍA ESTAR EN UTILS?
-const formElement = document.querySelector(".form");
-const inputName = document.querySelector(".form__input-type-name");
-const inputJob = document.querySelector(".form__input-type-about");
-const editName = document.querySelector(".main-bar__title"); ///????
-const editJob = document.querySelector(".main-bar__paragraph"); //COMO AGREGO LOS CAMBIOS AQUÍ??
-
-function handleForm(values) {
-  console.log(values, "values"); //Logs the values from the form inputs
-  if (values) {
-    editName.textContent = values.name; //Updates the input values in the form
-    editJob.textContent = values.about; //Updates the input values in the form
-
-    profilePopup.close(); // Cerrar el popup después de actualizar
-  }
-}
+//UserInfo
+//Since I used an object for the constructor, I must pass an object in the parameter
+const userInfo = new UserInfo({ nameSelector: editName, jobSelector: editJob }); //Instantiating UserInfo class with the selectors for name and job}){
+userInfo.setUserInfo({ name: "Andrea", job: "Web Developer" }); //Setting initial user info
+userInfo.getUserInfo(); //This methos is empty because it doesn't take any parameters, it just returns the user info from the selectors
 
 //Open profile popup
 openProfileButton.addEventListener("click", () => {
@@ -94,7 +92,7 @@ closeAddButton.addEventListener("click", () => {
 
 //Show image popup
 export const imagePopup = new PopupWithImage(imageContainer);
-
+imagePopup.setEventListeners(""); //Setting event listeners for the image popup
 imagePopup.close();
 
 //This notation is hard, but makes the code reusable:
