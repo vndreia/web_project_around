@@ -45,17 +45,18 @@ const section = new Section(
 section.renderItems(); //Calling the renderItems method to render all cards
 
 //FORMS
-const profilePopup = new PopupWithForm(popupProfile, (values) => {
-  handleForm(values); //Values was passed from the PopupWithForm class in the _getInputValues method, so the function executes after the form is submitted
-});
-profilePopup.setEventListeners(); //Setting event listeners for the profile popup
-
 //UserInfo
 //Since I used an object for the constructor, I must pass an object in the parameter
 const userInfo = new UserInfo({ nameSelector: editName, jobSelector: editJob }); //Instantiating UserInfo class with the selectors for name and job}){
 userInfo.setUserInfo({ name: "Andrea", job: "Web Developer" }); //Setting initial user info
 userInfo.getUserInfo(); //This methos is empty because it doesn't take any parameters, it just returns the user info from the selectors
 
+const profilePopup = new PopupWithForm(popupProfile, (values) => {
+  // handleForm(values); //Values was passed from the PopupWithForm class in the _getInputValues method, so the function executes after the form is submitted
+  userInfo.setUserInfo({ name: values.name, job: values.about });
+  profilePopup.close(); //Sets the user info with the values from the for
+});
+profilePopup.setEventListeners(); //Setting event listeners for the profile popup
 //Open profile popup
 openProfileButton.addEventListener("click", () => {
   profilePopup.open(); //Opens the profile popup when the button is clicked
