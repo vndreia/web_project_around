@@ -143,8 +143,8 @@
   color: #000;
 }
 .card__like-button.active .heart-icon path {
-  fill: currentColor; /* rellena el corazón con el color definido en .active */
-  stroke: currentColor; /* para que el borde también cambie a ese color */
+  fill: currentcolor; /* rellena el corazón con el color definido en .active */
+  stroke: currentcolor; /* para que el borde también cambie a ese color */
 }
 
 .card__trash-button {
