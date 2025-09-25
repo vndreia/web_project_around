@@ -21,6 +21,7 @@ import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForms.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
+import { api } from "../components/api.js";
 //Instantiate is always saved in a
 //imagePopup2 is created before imagePopup, because its functionality is to open the image popup when a card is clicked
 //This means imagePopup2 has to be created before any card is created, so the function can be passed as a parameter when creating a new Card instance
@@ -50,7 +51,12 @@ section.renderItems(); //Calling the renderItems method to render all cards
 const userInfo = new UserInfo({ nameSelector: editName, jobSelector: editJob }); //Instantiating UserInfo class with the selectors for name and job}){
 userInfo.setUserInfo({ name: "Andrea", job: "Web Developer" }); //Setting initial user info
 userInfo.getUserInfo(); //This methos is empty because it doesn't take any parameters, it just returns the user info from the selectors
+//We use the api instance to get user info from the server:
+api.getUserInfo().then((data) => {
+  console.log(data, "----> data"); //Logging the data received from the server
+});
 
+//Profile form
 const profilePopup = new PopupWithForm(popupProfile, (values) => {
   // handleForm(values); //Values was passed from the PopupWithForm class in the _getInputValues method, so the function executes after the form is submitted
   userInfo.setUserInfo({ name: values.name, job: values.about });
