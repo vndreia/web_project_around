@@ -2,7 +2,7 @@ export class Card {
   constructor(cardData, cardTemplate, handleCardClick) {
     //Third parameter as a function to open the image popup
     this.cardData = cardData;
-    this.cardTemplate = cardTemplate;
+    this.cardTemplate = cardTemplate; //where youu insert the card data
     this.card = null; //This means this is still not defined. This indicates a value, not a string. Thats's why we don't put an empty string "" instead.
     this.handleCardClick = handleCardClick;
     //This means this.card exists but its value its yet not defined, Will be defined when the template is cloned.

@@ -30,10 +30,19 @@ class Api {
   getUserInfo() {
     return this.makeRequest("users/me", "GET"); //No body for GET
   }
+  //cargar cards
+  getInitialCards() {
+    return this.makeRequest("cards", "GET"); //No body for GET
+  }
+  //editar perfil de usuario with patch
+  editProfile(body) {
+    //why do we put body here and not only in makeRequest?
+    return this.makeRequest("users/me", "PATCH", body);
+    {
+      //we send the body with the new data
+    }
+  }
 }
-//cargar cards
-//editar perfil de usuario
-
 export const api = new Api("https://around-api.es.tripleten-services.com/v1/", {
   authorization: "b0e42903-56d9-4a35-ba61-32f35d4aa19b", //my token
   "Content-Type": "application/json",
