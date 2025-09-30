@@ -5,7 +5,6 @@ class Api {
   }
 
   //método genérico para gestión de la llamada
-
   makeRequest(endpoint, method, body) {
     //this receives the route
     return fetch(`${this.baseURL}${endpoint}`, {
@@ -36,11 +35,15 @@ class Api {
   }
   //editar perfil de usuario with patch
   editProfile(body) {
-    //why do we put body here and not only in makeRequest?
+    //this time we need body for patch
     return this.makeRequest("users/me", "PATCH", body);
     {
       //we send the body with the new data
     }
+  }
+  //add new cards with POST
+  addNewCard(body) {
+    return this.makeRequest("cards", "POST", body);
   }
 }
 export const api = new Api("https://around-api.es.tripleten-services.com/v1/", {

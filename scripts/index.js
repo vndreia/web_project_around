@@ -27,6 +27,8 @@ import { api } from "../components/api.js";
 //imagePopup2 is created before imagePopup, because its functionality is to open the image popup when a card is clicked
 //This means imagePopup2 has to be created before any card is created, so the function can be passed as a parameter when creating a new Card instance
 const imagePopup2 = new PopupWithImage(imageContainer);
+let section = null; //Needed a section variable to use different Section instances
+//We will use this instance to render the cards from the server
 //RENDER CARDS
 //This is the renderer function that will show the cards in the section
 //Card is passed as a new instance inside the Section class
@@ -35,7 +37,7 @@ const imagePopup2 = new PopupWithImage(imageContainer);
 //The renderer function is responsible for creating a new Card instance and returning the rendered card element
 api.getInitialCards().then((cards) => {
   console.log(cards, "-----> cards from server");
-  const section = new Section(
+  section = new Section( //This is where I create the Section instance for the 1st time and reuse it to render the cards from the server
     cards, //Here's where I changed initialCards to cards to load from server
     (card) => {
       const newCard = new Card(card, cardTemplate, (data, title, title2) =>
@@ -99,13 +101,17 @@ const addPlacePopup = new PopupWithForm(popupAddPlace, (values) => {
 addPlacePopup.setEventListeners(); //Setting event listeners for the add place popup
 
 function handlePlace(values) {
-  const formattedValues = { name: values.place, link: values.link };
-  const newCard = new Card(formattedValues, cardTemplate);
-  const cardImage = newCard._renderCard();
-  Section.addItem(cardImage); //Adds the new card to the section
-  addPlacePopup.close(); // Closes the popup after adding the card
-  addPlaceInput.value = ""; //"" empty space
-  addLinkInput.value = ""; //Resets the input values after adding the card
+  const formattedValues = { name: values.place, link: values.link }; // values.place ← comes from name="place" and values.link ← comes from name="link" in the form inputs
+  //Now before calling the API, we need to format the values to match the API requirements, cuz the API expects an object with name and link properties
+  api.addNewCard(formattedValues).then((card) => {
+    console.log(card, "-----> new card from my server");
+    const newCard = new Card(card, cardTemplate); //changed formattedValues to newCard to show the card created in the server with its ID
+    const cardImage = newCard._renderCard();
+    section.addItem(cardImage); //Adds the new card to the section
+    addPlacePopup.close(); // Closes the popup after adding the card
+    addPlaceInput.value = ""; //"" empty space
+    addLinkInput.value = ""; //Resets the input values after adding the card
+  });
 }
 
 //Open and close popupAddPlace
