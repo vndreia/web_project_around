@@ -1,4 +1,4 @@
-class Api {
+export class Api {
   constructor(baseURL, headers) {
     this.baseURL = baseURL;
     this.headers = headers;
@@ -44,6 +44,17 @@ class Api {
   //add new cards with POST
   addNewCard(body) {
     return this.makeRequest("cards", "POST", body);
+  }
+  //like card
+  likeTheCard(cardId) {
+    //need the cardId to like a specific card
+    //This method will be used to toggle the like state of a card
+    //INTERESTING one: the Tripleten API uses PUT instead of PATCH for likes bc it treats it as a sepparate resource
+    //and each API has its own rules, which is why its important to read the API documentation ):
+    return this.makeRequest(`cards/${cardId}/likes`, "PUT"); //the likes endpoint was a guess from Claude literally based in REST patterns... it worked!
+  }
+  unlikeTheCard(cardId) {
+    return this.makeRequest(`cards/${cardId}/likes`, "DELETE");
   }
 }
 export const api = new Api("https://around-api.es.tripleten-services.com/v1/", {
