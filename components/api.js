@@ -56,6 +56,10 @@ export class Api {
   unlikeTheCard(cardId) {
     return this.makeRequest(`cards/${cardId}/likes`, "DELETE");
   }
+
+  deleteCard(cardId) {
+    return this.makeRequest(`cards/${cardId}`, "DELETE");
+  }
 }
 export const api = new Api("https://around-api.es.tripleten-services.com/v1/", {
   authorization: "b0e42903-56d9-4a35-ba61-32f35d4aa19b", //my token

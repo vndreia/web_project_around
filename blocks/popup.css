@@ -1,4 +1,5 @@
 .popup {
+  /*the overlay*/
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -49,7 +50,8 @@
   margin: 0 auto;
 }
 
-.popup__button-close { /*Add card*/
+.popup__button-close {
+  /*Add card*/
   background: url(../images/close-icon.svg) center no-repeat;
   width: 50px;
   height: 50px;
@@ -136,15 +138,16 @@
   opacity: 0.5;
 }
 
-.popup__error_visible { /* Class to show the error message */
+.popup__error_visible {
+  /* Class to show the error message */
   display: block;
   color: red;
   width: 200px;
   align-self: center;
 }
 
-
-.form__button_disabled  {  /*class applied when inputs in the form are invalid*/
+.form__button_disabled {
+  /*class applied when inputs in the form are invalid*/
   background-color: #fff;
   color: #a09f9f;
   border: 1px solid #a09f9f;
@@ -152,9 +155,10 @@
   opacity: 0.6;
 }
 
-.form__input-error { /*class applied when the input is wrong*/
-border-bottom:2px solid red;
-outline: none; /*outline removes the automatic field around the input set by default by the browser*/
+.form__input-error {
+  /*class applied when the input is wrong*/
+  border-bottom: 2px solid red;
+  outline: none; /*outline removes the automatic field around the input set by default by the browser*/
 }
 
 @media screen and (max-width: 700px) {

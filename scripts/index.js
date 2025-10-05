@@ -15,6 +15,9 @@ import {
   editName,
   editJob,
   profileImage,
+  popupDeleteCard,
+  deleteConfirmationBtn,
+  closeDeletePopup,
 } from "./utils.js"; //Import goes a the top and can mix functions and vars
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -23,10 +26,12 @@ import { PopupWithForm } from "../components/PopupWithForms.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { api } from "../components/api.js";
+import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 //Instantiate is always saved in a const
 //imagePopup2 is created before imagePopup, because its functionality is to open the image popup when a card is clicked
 //This means imagePopup2 has to be created before any card is created, so the function can be passed as a parameter when creating a new Card instance
 const imagePopup2 = new PopupWithImage(imageContainer);
+
 let section = null; //Needed a section variable to use different Section instances
 //We will use this instance to render the cards from the server
 //RENDER CARDS
@@ -36,7 +41,6 @@ let section = null; //Needed a section variable to use different Section instanc
 //The renderer function is passed as a callback with data, title, and title2 parameters as link, altText and title
 //The renderer function is responsible for creating a new Card instance and returning the rendered card element
 api.getInitialCards().then((cards) => {
-  console.log(cards, "-----> cards from server");
   section = new Section( //This is where I create the Section instance for the 1st time and reuse it to render the cards from the server
     cards, //Here's where I changed initialCards to cards to load from server
     (card) => {
@@ -71,7 +75,11 @@ api.getUserInfo().then((data) => {
   console.log(data, "----> data"); //Logging the data received from the server
 });
 
-//Profile form
+//EDIT PROFILE FORM
+//We create a new instance of PopupWithForm for the profile popup
+//We pass the popupProfile selector and a function to handle the form submission
+//The function takes the values from the form and sets the user info
+//We also call the api method to update the user info on the server
 const profilePopup = new PopupWithForm(popupProfile, (values) => {
   // handleForm(values); //Values was passed from the PopupWithForm class in the _getInputValues method, so the function executes after the form is submitted
   api.editProfile(values).then((values) => {
@@ -94,7 +102,7 @@ closeProfileButton.addEventListener("click", () => {
   profilePopup.close(); //Closes the profile popup when the close button is clicked
 });
 
-//Add place form
+//ADD PLACE FORM
 const addPlacePopup = new PopupWithForm(popupAddPlace, (values) => {
   handlePlace(values);
 });
@@ -123,11 +131,34 @@ closeAddButton.addEventListener("click", () => {
   addPlacePopup.close();
 });
 
-//Show image popup
+//IMAGE POPUP
 export const imagePopup = new PopupWithImage(imageContainer);
 imagePopup.setEventListeners(""); //Setting event listeners for the image popup
 imagePopup.close();
 
+//DELETE CARD POPUP
+function handleDeletePopup(cardId, cardElement) {
+  //when you click a delete button, your app needs to tell the API which card. That’s why we pass cardId down into handleDelete.
+  return api
+    .deleteCard(cardId)
+    .then(() => {
+      cardElement.remove(); //cardElement is the card element that was passed when creating the PopupWithConfirmation instance
+    })
+    .catch((err) => {
+      console.log(err, "-----> error deleting card");
+      alert("Error deleting card. Please try again.");
+    });
+}
+
+export const deleteCardPopup = new PopupWithConfirmation(
+  popupDeleteCard,
+  deleteConfirmationBtn,
+  closeDeletePopup,
+  handleDeletePopup
+);
+
+//FORM VALIDATION
+//Create a new instance of FormValidator
 //This notation is hard, but makes the code reusable:
 const formValidator = new FormValidator({
   formSelector: ".form",

@@ -54,3 +54,13 @@ export const addLinkInput = document.querySelector(".form__input-link");
 export const closeAddButton = document.querySelector(
   ".popup__button-close-place"
 );
+
+//DELETE CARD POPUP
+export const popupDeleteCard = document.querySelector(".popup-delete-card"); //Delete card
+export const deleteConfirmationBtn = document.querySelector(
+  ".form__button-delete"
+);
+export const closeDeletePopup = document.querySelector(
+  ".popup__button-close-delete-card"
+);
+export const cardContainer = document.querySelector(".cards"); //section where all the cards are

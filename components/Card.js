@@ -1,4 +1,5 @@
 import { api } from "./api.js"; //importing the api class to use its methods inside the Card class
+import { deleteCardPopup } from "../scripts/index.js"; //importing the deleteCardPopup instance to use its open method inside the Card class
 export class Card {
   constructor(cardData, cardTemplate, handleCardClick) {
     //Third parameter as a function to open the image popup
@@ -38,11 +39,9 @@ export class Card {
     const deleteButton = this.card.querySelector(".card__trash-button"); //When you clone the template you save that node in this.card, so now all access comes from this.card
     const likeButton = this.card.querySelector(".card__like-button"); //constructor
     const image = this.card.querySelector(".card__image");
+    const deleteCardButton = this.card.querySelector(".card__trash-button");
 
-    deleteButton.addEventListener("click", (event) => {
-      event.target.closest(".card__item").remove();
-    });
-
+    //LIKE BUTTON LISTENER
     likeButton.addEventListener("click", () => {
       if (this.cardData.isLiked) {
         //take the card object and go right into its isLiked property
@@ -58,6 +57,11 @@ export class Card {
         });
       }
     });
+    //DELETE BUTTON LISTENER
+    deleteCardButton.addEventListener("click", () => {
+      deleteCardPopup.open(this.cardData._id, this.card);
+    });
+    //OPEN IMAGE POPUP LISTENER
     image.addEventListener("click", () => {
       this.handleCardClick(
         this.cardData.link,
