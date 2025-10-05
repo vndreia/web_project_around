@@ -1,5 +1,6 @@
 import { api } from "./api.js"; //importing the api class to use its methods inside the Card class
 import { deleteCardPopup } from "../scripts/index.js"; //importing the deleteCardPopup instance to use its open method inside the Card class
+
 export class Card {
   constructor(cardData, cardTemplate, handleCardClick) {
     //Third parameter as a function to open the image popup

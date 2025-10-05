@@ -1,3 +1,5 @@
+import Popup from "./Popup.js"; // ← Add this!
+
 export class PopupWithConfirmation extends Popup {
   constructor(container, confirmationDeleteBtn, closeBtn, handleDelete) {
     //you repeat the same parameters as in the parent class
