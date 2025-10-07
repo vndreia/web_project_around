@@ -149,13 +149,14 @@ function handleDeletePopup(cardId, cardElement) {
       alert("Error deleting card. Please try again.");
     });
 }
-
 export const deleteCardPopup = new PopupWithConfirmation(
   popupDeleteCard,
   deleteConfirmationBtn,
   closeDeletePopup,
   handleDeletePopup
 );
+
+deleteCardPopup.setEventListeners(); //Setting event listeners for the delete card popu
 
 //FORM VALIDATION
 //Create a new instance of FormValidator
