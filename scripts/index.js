@@ -18,6 +18,7 @@ import {
   popupDeleteCard,
   deleteConfirmationBtn,
   closeDeletePopup,
+  cardElement,
 } from "./utils.js"; //Import goes a the top and can mix functions and vars
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -40,20 +41,23 @@ let section = null; //Needed a section variable to use different Section instanc
 //Notice how the new Section instance takes three parameters: items, renderer, and container
 //The renderer function is passed as a callback with data, title, and title2 parameters as link, altText and title
 //The renderer function is responsible for creating a new Card instance and returning the rendered card element
-api.getInitialCards().then((cards) => {
-  section = new Section( //This is where I create the Section instance for the 1st time and reuse it to render the cards from the server
-    cards, //Here's where I changed initialCards to cards to load from server
-    (card) => {
-      const newCard = new Card(card, cardTemplate, (data, title, title2) =>
-        imagePopup2.open(data, title, title2)
-      ); //Se pasa la función que abre el popup
-      return newCard._renderCard();
-    },
-    cardsZone
-  );
-  section.renderItems(); //Calling the renderItems method to render all cards
-});
+function addCards() {
+  api.getInitialCards().then((cards) => {
+    section = new Section( //This is where I create the Section instance for the 1st time and reuse it to render the cards from the server
+      cards, //Here's where I changed initialCards to cards to load from server
+      (card) => {
+        const newCard = new Card(card, cardTemplate, (data, title, title2) =>
+          imagePopup2.open(data, title, title2)
+        ); //Se pasa la función que abre el popup
+        return newCard._renderCard();
+      },
+      cardsZone
+    );
+    section.renderItems(); //Calling the renderItems method to render all cards
+  });
+}
 
+addCards();
 //FORMS
 //UserInfo
 //Since I used an object for the constructor, I must pass an object in the parameter
@@ -138,22 +142,19 @@ imagePopup.close();
 
 //DELETE CARD POPUP
 function handleDeletePopup(cardId, cardElement) {
+  console.log(cardElement, "<--- Card Element");
   //when you click a delete button, your app needs to tell the API which card. That’s why we pass cardId down into handleDelete.
-  return api
-    .deleteCard(cardId)
-    .then(() => {
-      cardElement.remove(); //cardElement is the card element that was passed when creating the PopupWithConfirmation instance
-    })
-    .catch((err) => {
-      console.log(err, "-----> error deleting card");
-      alert("Error deleting card. Please try again.");
-    });
+  return api.deleteCard(cardId).catch((err) => {
+    console.log(err, "-----> error deleting card");
+  });
 }
+
 export const deleteCardPopup = new PopupWithConfirmation(
   popupDeleteCard,
   deleteConfirmationBtn,
   closeDeletePopup,
-  handleDeletePopup
+  handleDeletePopup,
+  addCards
 );
 
 deleteCardPopup.setEventListeners(); //Setting event listeners for the delete card popu

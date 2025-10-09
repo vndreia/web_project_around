@@ -13,7 +13,7 @@ export class Card {
 
   //Methods
   _renderCard() {
-    this._getDataTemplate();
+    this.card = this._getDataTemplate();
     return this.card;
   }
 
@@ -41,7 +41,7 @@ export class Card {
     const likeButton = this.card.querySelector(".card__like-button"); //constructor
     const image = this.card.querySelector(".card__image");
     const deleteCardButton = this.card.querySelector(".card__trash-button");
-
+    const cardItem = this.card.querySelector(".card__item");
     //LIKE BUTTON LISTENER
     likeButton.addEventListener("click", () => {
       if (this.cardData.isLiked) {
@@ -58,9 +58,13 @@ export class Card {
         });
       }
     });
+    //1
+    console.log(this.card, "This.card 1");
     //DELETE BUTTON LISTENER
     deleteCardButton.addEventListener("click", () => {
-      deleteCardPopup.open(this.cardData._id, this.card);
+      //2
+      console.log(this.card, "this.card 2");
+      deleteCardPopup.open(this.cardData._id, cardItem);
     });
     //OPEN IMAGE POPUP LISTENER
     image.addEventListener("click", () => {

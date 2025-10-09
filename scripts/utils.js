@@ -64,3 +64,4 @@ export const closeDeletePopup = document.querySelector(
   ".popup__button-close-delete-card"
 );
 export const cardContainer = document.querySelector(".cards"); //section where all the cards are
+export const cardElement = document.querySelector(".card__item"); //single card element
