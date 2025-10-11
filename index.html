@@ -49,6 +49,28 @@
         </form>
       </div>
     </div>
+    <!-- Popup para editar foto de perfil  -->
+    <div class="popup popup-edit-avatar">
+      <div class="popup__container">
+        <button class="popup__button-close popup__button-close-avatar"></button>
+        <form class="form form__edit-avatar">
+          <h2 class="form__title form__title-avatar">Cambiar foto de perfil</h2>
+          <label for="avatar"></label>
+          <input
+            type="url"
+            class="form__input form__input-avatar"
+            id="avatar"
+            placeholder="Enlace a la imagen"
+            required
+            name="avatar"
+          />
+          <span id="avatar-error" class="popup__error-visible"></span>
+          <button type="submit" class="form__button-save" disabled>
+            Guardar
+          </button>
+        </form>
+      </div>
+    </div>
     <div class="popup popup-add-place">
       <div class="popup__container">
         <button class="popup__button-close popup__button-close-place"></button>
