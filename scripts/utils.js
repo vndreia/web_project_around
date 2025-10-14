@@ -65,3 +65,11 @@ export const closeDeletePopup = document.querySelector(
 );
 export const cardContainer = document.querySelector(".cards"); //section where all the cards are
 export const cardElement = document.querySelector(".card__item"); //single card element
+
+//AVATAR POPUP
+export const avatarContainer = document.querySelector(".popup-edit-avatar");
+export const closeAvatarBtn = document.querySelector(
+  ".popup__button-close-avatar"
+);
+export const editProfileAvatarBtn = document.querySelector(".edit-icon");
+export const saveAvatarBtn = document.querySelector(".form__button-avatar");

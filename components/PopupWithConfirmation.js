@@ -1,5 +1,4 @@
 import { Popup } from "./Popup.js"; //IMPORT THE PARENT CLASS
-import { cardContainer, cardElement } from "../scripts/utils.js";
 
 export class PopupWithConfirmation extends Popup {
   constructor(
@@ -11,6 +10,8 @@ export class PopupWithConfirmation extends Popup {
   ) {
     //you repeat the same parameters as in the parent class
     super(container); //You call the same number of parameters as the parent class constructor
+    //But only the ones that you need to create the child class instance
+    //In this case, only container is needed by the parent class (Popup)
     this._confirmationDeleteBtn = confirmationDeleteBtn;
     this._closeBtn = closeBtn;
     this._handleDelete = handleDelete; //Function to keep track of the user confirmation
@@ -28,7 +29,6 @@ export class PopupWithConfirmation extends Popup {
   open(cardId, cardElement) {
     this._cardId = cardId; //without cardId and cardElement, the popup wouldn't know WHAT to delete when the user clicks "Confirm".
     this._cardElement = cardElement;
-    console.log(cardElement, "<--- Card Element");
     super.open(); //Popup uses the stored values in (this._cardId, this._cardElement) to delete the correct item when the user confirms the action.
   }
 

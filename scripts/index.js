@@ -19,6 +19,10 @@ import {
   deleteConfirmationBtn,
   closeDeletePopup,
   cardElement,
+  avatarContainer,
+  closeAvatarBtn,
+  editProfileAvatarBtn,
+  saveAvatarBtn,
 } from "./utils.js"; //Import goes a the top and can mix functions and vars
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -28,6 +32,7 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { api } from "../components/api.js";
 import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
+import { PopupAvatar } from "../components/PopupAvatar.js";
 //Instantiate is always saved in a const
 //imagePopup2 is created before imagePopup, because its functionality is to open the image popup when a card is clicked
 //This means imagePopup2 has to be created before any card is created, so the function can be passed as a parameter when creating a new Card instance
@@ -86,9 +91,7 @@ api.getUserInfo().then((data) => {
 //We also call the api method to update the user info on the server
 const profilePopup = new PopupWithForm(popupProfile, (values) => {
   // handleForm(values); //Values was passed from the PopupWithForm class in the _getInputValues method, so the function executes after the form is submitted
-  api.editProfile(values).then((values) => {
-    console.log(values, "-----> updated values from my server");
-  });
+  api.editProfile(values).then((values) => {});
   userInfo.setUserInfo({
     name: values.name,
     job: values.about,
@@ -105,6 +108,33 @@ openProfileButton.addEventListener("click", () => {
 closeProfileButton.addEventListener("click", () => {
   profilePopup.close(); //Closes the profile popup when the close button is clicked
 });
+
+//AVATAR POPUP
+const handleUpdateAvatar = (url) => {
+  api
+    .changeAvatar({ avatar: url }) // ← Pass as object with 'avatar' key
+    //  //RESTful APIs typically expect structured data like { key: value }
+    .then((res) => console.log(res, "-----> response from changing avatar"))
+    .then((userData) => {
+      const imageAvatar = document.querySelector(".main-bar__image");
+      imageAvatar.src = userData.avatar;
+      avatarContainer.close();
+    })
+    .catch((err) => console.log(err, "-----> error changing avatar"));
+};
+
+const avatarPopup = new PopupAvatar(
+  avatarContainer,
+  saveAvatarBtn,
+  closeAvatarBtn,
+  handleUpdateAvatar
+);
+
+editProfileAvatarBtn.addEventListener("click", () => {
+  avatarPopup.open();
+});
+
+avatarPopup.setEventListeners(); //Setting event listeners for the avatar popup
 
 //ADD PLACE FORM
 const addPlacePopup = new PopupWithForm(popupAddPlace, (values) => {

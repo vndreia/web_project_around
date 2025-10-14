@@ -10,7 +10,6 @@ export class PopupWithForm extends Popup {
   }
   //Gathers data from the form inputs
   _getInputValues() {
-    console.log(this.inputs, "inputs");
     const values = {}; //Object to store input values
     this.inputs.forEach((input) => {
       values[input.name] = input.value; //Iterates over the inputs and stores their values
@@ -19,8 +18,6 @@ export class PopupWithForm extends Popup {
     return values; //Returns the object with input values
   }
 
-  //Cómo sacas los valores de los inputs?
-  //Por qué los corchetes lo hacen dinámico?
   setEventListeners() {
     super.setEventListeners(); //Calls the setEventListeners method from Popup
     this.form.addEventListener("submit", (evt) => {
