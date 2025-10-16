@@ -111,16 +111,22 @@ closeProfileButton.addEventListener("click", () => {
 
 //AVATAR POPUP
 const handleUpdateAvatar = (url) => {
+  const saveAvatarBtn2 = document.querySelector(".form__button-save");
+
+  saveAvatarBtn2.textContent = "Guardando..."; //Changes button text to indicate saving in progress
   api
     .changeAvatar({ avatar: url }) // ← Pass as object with 'avatar' key
     //  //RESTful APIs typically expect structured data like { key: value }
-    .then((res) => console.log(res, "-----> response from changing avatar"))
     .then((userData) => {
+      console.log(userData, "<---- user data from changing avatar");
       const imageAvatar = document.querySelector(".main-bar__image");
       imageAvatar.src = userData.avatar;
-      avatarContainer.close();
+      avatarPopup.close();
     })
-    .catch((err) => console.log(err, "-----> error changing avatar"));
+    .catch((err) => console.log(err, "-----> error changing avatar"))
+    .finally(() => {
+      saveAvatarBtn2.textContent = "Guardar"; //Resets button text after operation
+    });
 };
 
 const avatarPopup = new PopupAvatar(

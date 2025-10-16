@@ -72,4 +72,4 @@ export const closeAvatarBtn = document.querySelector(
   ".popup__button-close-avatar"
 );
 export const editProfileAvatarBtn = document.querySelector(".edit-icon");
-export const saveAvatarBtn = document.querySelector(".form__button-avatar");
+export const saveAvatarBtn = document.querySelector(".form__button-save");

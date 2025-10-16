@@ -46,9 +46,7 @@ this._cardId - Ensures there's an ID to delete (prevents deleting nothing or cau
 this._cardElement - Confirms the DOM element exists (prevents trying to manipulate a non-existent element) */
     this._confirmationDeleteBtn.addEventListener("click", () => {
       if (this._handleDelete && this._cardId && this._cardElement) {
-        this._handleDelete(this._cardId, this._cardElement); //once you verified there's a delete handler function, a card ID, and a card element to work with
-        console
-          .log(this._cardElement, "PopupWithConfirmation")
+        this._handleDelete(this._cardId, this._cardElement) //once you verified there's a delete handler function, a card ID, and a card element to work with
           //now you can safely call the delete handler function, passing in the stored card ID and card element
           .then(() => this._cardElement.remove())
           //and then close the popup after the deletion is successful
