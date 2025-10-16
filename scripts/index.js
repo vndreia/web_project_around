@@ -91,6 +91,9 @@ api.getUserInfo().then((data) => {
 //We also call the api method to update the user info on the server
 const profilePopup = new PopupWithForm(popupProfile, (values) => {
   // handleForm(values); //Values was passed from the PopupWithForm class in the _getInputValues method, so the function executes after the form is submitted
+  const editProfileBtn2 = (document.querySelector(
+    "#edit-profile-btn"
+  ).textContent = "Guardando..."); //Changes button text to indicate saving in progress
   api.editProfile(values).then((values) => {});
   userInfo.setUserInfo({
     name: values.name,
@@ -98,6 +101,7 @@ const profilePopup = new PopupWithForm(popupProfile, (values) => {
     image: values.image,
   });
   profilePopup.close(); //Sets the user info with the values from the form
+  editProfileBtn2.textContent = "Guardar"; //Resets button text after operation
 });
 profilePopup.setEventListeners(); //Setting event listeners for the profile popup
 //Open profile popup
@@ -111,14 +115,12 @@ closeProfileButton.addEventListener("click", () => {
 
 //AVATAR POPUP
 const handleUpdateAvatar = (url) => {
-  const saveAvatarBtn2 = document.querySelector(".form__button-save");
-
+  const saveAvatarBtn2 = document.querySelector("#button-avatar");
   saveAvatarBtn2.textContent = "Guardando..."; //Changes button text to indicate saving in progress
   api
     .changeAvatar({ avatar: url }) // ← Pass as object with 'avatar' key
     //  //RESTful APIs typically expect structured data like { key: value }
     .then((userData) => {
-      console.log(userData, "<---- user data from changing avatar");
       const imageAvatar = document.querySelector(".main-bar__image");
       imageAvatar.src = userData.avatar;
       avatarPopup.close();
@@ -150,16 +152,21 @@ addPlacePopup.setEventListeners(); //Setting event listeners for the add place p
 
 function handlePlace(values) {
   const formattedValues = { name: values.place, link: values.link }; // values.place ← comes from name="place" and values.link ← comes from name="link" in the form inputs
-  //Now before calling the API, we need to format the values to match the API requirements, cuz the API expects an object with name and link properties
-  api.addNewCard(formattedValues).then((card) => {
-    console.log(card, "-----> new card from my server");
-    const newCard = new Card(card, cardTemplate); //changed formattedValues to newCard to show the card created in the server with its ID
-    const cardImage = newCard._renderCard();
-    section.addItem(cardImage); //Adds the new card to the section
-    addPlacePopup.close(); // Closes the popup after adding the card
-    addPlaceInput.value = ""; //"" empty space
-    addLinkInput.value = ""; //Resets the input values after adding the card
-  });
+  //Now before calling the API, we need to format the values to match the API requirements, cuz the API expects an object with name and link properties}
+  const addCardBtn = (document.querySelector("#addCard-btn").textContent =
+    "Guardando...");
+  api
+    .addNewCard(formattedValues)
+    .then((card) => {
+      console.log(card, "-----> new card from my server");
+      const newCard = new Card(card, cardTemplate); //changed formattedValues to newCard to show the card created in the server with its ID
+      const cardImage = newCard._renderCard();
+      section.addItem(cardImage); //Adds the new card to the section
+      addPlacePopup.close(); // Closes the popup after adding the card
+      addPlaceInput.value = ""; //"" empty space
+      addLinkInput.value = ""; //Resets the input values after adding the card
+    })
+    .finally(() => (addCardBtn.textContent = "Guardar"));
 }
 
 //Open and close popupAddPlace
@@ -179,10 +186,15 @@ imagePopup.close();
 //DELETE CARD POPUP
 function handleDeletePopup(cardId, cardElement) {
   console.log(cardElement, "<--- Card Element");
+  const deleteCardBtn = (document.querySelector("#deleteCard-btn").textContent =
+    "Eliminando...");
   //when you click a delete button, your app needs to tell the API which card. That’s why we pass cardId down into handleDelete.
-  return api.deleteCard(cardId).catch((err) => {
-    console.log(err, "-----> error deleting card");
-  });
+  return api
+    .deleteCard(cardId)
+    .catch((err) => {
+      console.log(err, "-----> error deleting card");
+    })
+    .finally(() => (deleteCardBtn.textContent = "Sí"));
 }
 
 export const deleteCardPopup = new PopupWithConfirmation(
