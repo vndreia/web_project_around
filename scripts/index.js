@@ -129,6 +129,7 @@ const handleUpdateAvatar = (url) => {
     .changeAvatar({ avatar: url }) // ← Pass as object with 'avatar' key
     //  //RESTful APIs typically expect structured data like { key: value }
     .then((userData) => {
+      console.log("API Response:", userData);
       const imageAvatar = document.querySelector(".main-bar__image");
       imageAvatar.src = userData.avatar;
       avatarPopup.close();
