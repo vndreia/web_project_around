@@ -81,7 +81,6 @@ api.getUserInfo().then((data) => {
     job: data.about,
     image: data.avatar,
   }); // Server responds: "Name is John, job is Developer", userInfo is choosing which specific data to pick from the server response and show on your webpage.
-  console.log(data, "----> data"); //Logging the data received from the server
 });
 
 //EDIT PROFILE FORM
@@ -90,19 +89,28 @@ api.getUserInfo().then((data) => {
 //The function takes the values from the form and sets the user info
 //We also call the api method to update the user info on the server
 const profilePopup = new PopupWithForm(popupProfile, (values) => {
-  // handleForm(values); //Values was passed from the PopupWithForm class in the _getInputValues method, so the function executes after the form is submitted
-  const editProfileBtn2 = (document.querySelector(
-    "#edit-profile-btn"
-  ).textContent = "Guardando..."); //Changes button text to indicate saving in progress
-  api.editProfile(values).then((values) => {});
-  userInfo.setUserInfo({
-    name: values.name,
-    job: values.about,
-    image: values.image,
-  });
-  profilePopup.close(); //Sets the user info with the values from the form
-  editProfileBtn2.textContent = "Guardar"; //Resets button text after operation
+  handleProfileEdit(values);
 });
+
+function handleProfileEdit(values) {
+  const editProfileBtn = document.querySelector("#edit-profile-btn");
+  editProfileBtn.textContent = "Guardando..."; //Changes button text to indicate saving in progress
+  // handleForm(values); //Values was passed from the PopupWithForm class in the _getInputValues method, so the function executes after the form is submitted
+  api
+    .editProfile(values)
+    .then((updatedValues) => {
+      userInfo.setUserInfo({
+        name: values.name,
+        job: values.about,
+        image: values.image,
+      });
+      profilePopup.close(); //Sets the user info with the values from the form
+    })
+    .finally(() => {
+      editProfileBtn.textContent = "Guardar";
+    }); //Resets button text after operation
+}
+
 profilePopup.setEventListeners(); //Setting event listeners for the profile popup
 //Open profile popup
 openProfileButton.addEventListener("click", () => {
@@ -153,12 +161,11 @@ addPlacePopup.setEventListeners(); //Setting event listeners for the add place p
 function handlePlace(values) {
   const formattedValues = { name: values.place, link: values.link }; // values.place ← comes from name="place" and values.link ← comes from name="link" in the form inputs
   //Now before calling the API, we need to format the values to match the API requirements, cuz the API expects an object with name and link properties}
-  const addCardBtn = (document.querySelector("#addCard-btn").textContent =
-    "Guardando...");
+  const addCardBtn = document.querySelector("#addCard-btn");
+  addCardBtn.textContent = "Guardando..."; // Change text here
   api
     .addNewCard(formattedValues)
     .then((card) => {
-      console.log(card, "-----> new card from my server");
       const newCard = new Card(card, cardTemplate); //changed formattedValues to newCard to show the card created in the server with its ID
       const cardImage = newCard._renderCard();
       section.addItem(cardImage); //Adds the new card to the section
@@ -166,7 +173,9 @@ function handlePlace(values) {
       addPlaceInput.value = ""; //"" empty space
       addLinkInput.value = ""; //Resets the input values after adding the card
     })
-    .finally(() => (addCardBtn.textContent = "Guardar"));
+    .finally(() => {
+      addCardBtn.textContent = "Guardar";
+    }); // Reset text here
 }
 
 //Open and close popupAddPlace
@@ -185,9 +194,8 @@ imagePopup.close();
 
 //DELETE CARD POPUP
 function handleDeletePopup(cardId, cardElement) {
-  console.log(cardElement, "<--- Card Element");
-  const deleteCardBtn = (document.querySelector("#deleteCard-btn").textContent =
-    "Eliminando...");
+  const deleteCardBtn = document.querySelector("#deleteCard-btn");
+  deleteCardBtn.textContent = "Eliminando...";
   //when you click a delete button, your app needs to tell the API which card. That’s why we pass cardId down into handleDelete.
   return api
     .deleteCard(cardId)
