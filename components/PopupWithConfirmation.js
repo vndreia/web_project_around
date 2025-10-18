@@ -50,7 +50,7 @@ this._cardElement - Confirms the DOM element exists (prevents trying to manipula
           //now you can safely call the delete handler function, passing in the stored card ID and card element
           .then(() => this._cardElement.remove())
           //and then close the popup after the deletion is successful
-          .then(() => this._addCards())
+          //.then(() => this._addCards())
           .then(() => this.close())
           .catch((error) => console.error(error)); //shows any errors that occur during the deletion process
       }
